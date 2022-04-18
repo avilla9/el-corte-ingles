@@ -1,0 +1,7 @@
+{
+  "name": "el-corte-ingles",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
