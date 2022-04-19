@@ -7,17 +7,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
-import { MenuComponent } from './menu/menu.component';
 import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
   ],
-  exports: [
-    MenuComponent,
-  ],
+  exports: [],
   entryComponents: [],
   imports: [
     BrowserModule,
