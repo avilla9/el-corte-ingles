@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-section',
@@ -8,7 +9,10 @@ import { Router } from "@angular/router";
 })
 export class SectionComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private iab: InAppBrowser,
+  ) { }
 
   ngOnInit() { }
 
@@ -38,6 +42,7 @@ export class SectionComponent implements OnInit {
 
       case 4:
         this.externalPost('https://www.cyberclick.es/curso-transformacion-digital-equipos-ventas');
+        /* this.externalPost('https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf'); */
         break;
 
       case 5:
@@ -66,7 +71,8 @@ export class SectionComponent implements OnInit {
   }
 
   externalPost(url) {
-    window.open(url, '_blank');
+    /* window.open(url, '_system'); */
+    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#00ff00');
   }
 
   interalPost(data) {

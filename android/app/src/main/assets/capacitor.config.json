@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "el-corte-ingles",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
