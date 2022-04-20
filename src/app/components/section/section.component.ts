@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-section',
@@ -11,6 +12,7 @@ export class SectionComponent implements OnInit {
 
   constructor(
     private router: Router,
+    public navCtrl: NavController,
     private iab: InAppBrowser,
   ) { }
 
@@ -18,6 +20,7 @@ export class SectionComponent implements OnInit {
 
   clickPost(id) {
     let data = {};
+    localStorage.clear();
 
     switch (id) {
       case 1:
@@ -35,14 +38,15 @@ export class SectionComponent implements OnInit {
           'description': 'Seguro que tus clientes hay términos que aún no comprenden. Incluso puede que haya algunos que a ti también se te escapen porque se han visto modificados en los últimos años. Si este es el caso, aquí tienes la guía definitiva, un glosario de términos elaborado por la asociación empresarial del seguro, UNESPA.',
           'cta': 'Descárgatela ya',
           'cta-content': 'https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf',
-          'internal-route': ''
+          'internal-route': '',
+          'img': '3.jpg'
         };
         this.interalPost(data);
         break;
 
       case 4:
-        this.externalPost('https://www.cyberclick.es/curso-transformacion-digital-equipos-ventas');
-        /* this.externalPost('https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf'); */
+        /* this.externalPost('https://www.cyberclick.es/curso-transformacion-digital-equipos-ventas'); */
+        this.externalPost('https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf');
         break;
 
       case 5:
@@ -60,7 +64,8 @@ export class SectionComponent implements OnInit {
           'description': 'Esta aplicación es para ti, para que puedas conocer todas las campañas en las que estás participando, para que sepas, quieras y puedas adoptar una nueva herramienta, para que seas recompensado, para que accedas a contenido exclusivo para ti, por ser tú... Descubre todo lo que tiene, explórala, ¡úsala en tu día a día, te ayudará a lograr el éxito comercial que estás buscando!',
           'cta': 'Explora',
           'cta-content': '',
-          'internal-route': 'explora'
+          'internal-route': 'explora',
+          'img': '7.jpg'
         }
         this.interalPost(data);
         break;
@@ -76,7 +81,8 @@ export class SectionComponent implements OnInit {
   }
 
   interalPost(data) {
-
+    localStorage.setItem('post', JSON.stringify(data));
+    this.navCtrl.navigateForward("/post");
   }
 
 }

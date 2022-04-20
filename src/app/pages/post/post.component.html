@@ -1,0 +1,15 @@
+<app-header></app-header>
+<app-menu></app-menu>
+<ion-content overflow-scroll="true">
+  <img class="post-thumb" src="../../../assets/images/{{post.img}}">
+  <ion-card-header>
+    <ion-icon class="icon" name="heart-outline"></ion-icon>
+    <ion-icon class="icon" name="share-social-outline"></ion-icon>
+    <ion-card-subtitle>{{post.date}}</ion-card-subtitle>
+    <ion-card-title>{{post.title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>{{post.description}}</ion-card-content>
+  <!-- <ion-card>
+  </ion-card> -->
+</ion-content>

@@ -7,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
+  post: any;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.post = JSON.parse(localStorage.getItem("post"));
+  }
+
+  ionViewDidEnter() {
+    this.post = JSON.parse(localStorage.getItem("post"));
+  }
 
 }

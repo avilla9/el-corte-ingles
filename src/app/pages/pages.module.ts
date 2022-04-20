@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { ExploreComponent } from './explore/explore.component';
 import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from '../components/components.module';
+import { PostComponent } from './post/post.component';
 
 
 
@@ -11,11 +12,12 @@ import { ComponentsModule } from '../components/components.module';
   declarations: [
     HomeComponent,
     ExploreComponent,
+    PostComponent,
   ],
   imports: [
     CommonModule,
     IonicModule,
-    ComponentsModule
+    ComponentsModule,
   ]
 })
 export class PagesModule { }

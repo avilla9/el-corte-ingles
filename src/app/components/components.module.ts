@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { PostComponent } from './post/post.component';
 
 
 @NgModule({
@@ -14,14 +13,12 @@ import { PostComponent } from './post/post.component';
     HeaderComponent,
     MenuComponent,
     TabsComponent,
-    PostComponent,
   ],
   exports: [
     SectionComponent,
     HeaderComponent,
     MenuComponent,
     TabsComponent,
-    PostComponent
   ],
   imports: [
     CommonModule,

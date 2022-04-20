@@ -1,0 +1,22 @@
+ion-icon {
+  width: 8vw;
+  height: 8vw;
+  margin-right: 4vw;
+  color: var(--ion-color-medium);
+}
+
+ion-card-header {
+  ion-card-title {
+    font-weight: bold;
+  }
+
+  ion-card-subtitle {
+    margin-top: 6vw;
+    margin-bottom: 4vw;
+  }
+}
+
+ion-card-header,
+ion-card-content {
+  padding: 2vw 4vw;
+}
