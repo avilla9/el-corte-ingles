@@ -22,7 +22,7 @@ import { TabsComponent } from './tabs/tabs.component';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
   ]
 })
 export class ComponentsModule { }

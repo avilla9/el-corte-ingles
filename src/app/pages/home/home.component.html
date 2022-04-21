@@ -1,8 +1,16 @@
-<app-header></app-header>
+<ion-header #header id="header" class="ion-no-border">
+  <img class="logo" src="../../../assets/icon/eci-ehite.svg" />
+  <ion-menu-button menu="main-menu">
+    <ion-icon class="open-menu" name="person-circle-outline"></ion-icon>
+  </ion-menu-button>
+</ion-header>
+
 <app-menu></app-menu>
-<ion-content overflow-scroll="true">
+
+<ion-content scrollEvents="true" appHideHeader [header]="header" overflow-scroll="true">
   <app-section></app-section>
   <ion-footer class="ion-no-border">
-    2022 Created by
+    <span>2022 Created by</span>
+    <img class="tvc-logo" src="../../../assets/icon/tvc-white.svg" />
   </ion-footer>
 </ion-content>

@@ -45,9 +45,9 @@ export class SectionComponent implements OnInit {
         break;
 
       case 4:
-        /* this.externalPost('https://www.cyberclick.es/curso-transformacion-digital-equipos-ventas'); */
-        this.externalPost('https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf');
-        break;
+        this.externalPost('https://www.cyberclick.es/curso-transformacion-digital-equipos-ventas');
+        /* this.externalPost('https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf');
+        break; */
 
       case 5:
         this.externalPost('https://www.cualifica2.es/cursos/curso-gratis-tecnologias-ventas-atencion-al-cliente');
