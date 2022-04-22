@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampaignComponent implements OnInit {
 
+  public data: any;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }
