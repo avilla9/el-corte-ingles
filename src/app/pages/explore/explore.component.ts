@@ -14,6 +14,8 @@ import { AccessComponent } from '../access/access.component';
 export class ExploreComponent implements OnInit {
   @ViewChild('pageContainer', { read: ViewContainerRef }) pageContainer;
   activeTab = 0;
+  currentTitle: string;
+
   tabs = [
     {
       component: CampaignComponent,
@@ -55,6 +57,7 @@ export class ExploreComponent implements OnInit {
 
   changeTab(pos) {
     this.activeTab = pos;
+    this.currentTitle = this.tabs[pos].title;
     this.pageContainer.clear();
     this.pageContainer.createComponent(this.tabs[pos].component);
   }

@@ -13,6 +13,7 @@
   }
 
   .boxes {
+    margin-bottom: 4vw;
     .box {
       margin-bottom: 4vw;
       position: relative;
@@ -38,11 +39,22 @@
         z-index: 2;
 
         .title {
-          font-size: 4vw;
+          font-size: 6vw;
           font-weight: bold;
           color: var(--ion-color-light);
         }
       }
+    }
+  }
+
+  .statistics {
+    width: 100%;
+
+    .title {
+      font-size: 6vw;
+      text-align: center;
+      margin-bottom: 2vw;
+      font-weight: bold;
     }
   }
 }

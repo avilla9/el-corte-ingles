@@ -1,0 +1,17 @@
+<ion-header id="header" class="ion-no-border nnn">
+  <span>{{list.parentTitle}}</span>
+  <ion-icon class="open-menu" name="person-circle-outline" (click)="toggleMenu()"></ion-icon>
+</ion-header>
+<app-menu></app-menu>
+<ion-content overflow-scroll="true">
+  <div class="container">
+    <div class="post-list" *ngFor="let post of list.list" (click)="clickPost(post)">
+      <img src="../../../assets/images/{{post.image}}">
+      <div class="content">
+        <div class="title">{{post.title}}</div>
+        <div class="description">{{post.description}}</div>
+      </div>
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </div>
+  </div>
+</ion-content>

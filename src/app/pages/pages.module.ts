@@ -11,6 +11,9 @@ import { CampaignComponent } from './campaign/campaign.component';
 import { RewardsComponent } from './rewards/rewards.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { AccessComponent } from './access/access.component';
+import { ChartsModule } from 'ng2-charts';
+import { HeaderComponent } from '../components/header/header.component';
+import { PostListComponent } from './post-list/post-list.component';
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -26,6 +29,7 @@ const COMPONENTS = [ExploreComponent];
   declarations: [
     HomeComponent,
     PostComponent,
+    PostListComponent,
     COMPONENTS,
     ENTRYCOMPONENTS,
     /* ExploreComponent,
@@ -40,6 +44,7 @@ const COMPONENTS = [ExploreComponent];
     IonicModule,
     ComponentsModule,
     SharedDirectivesModule,
+    ChartsModule,
   ]
 })
 export class PagesModule { }

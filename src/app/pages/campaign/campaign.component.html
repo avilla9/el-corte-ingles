@@ -5,21 +5,21 @@
   </ion-select>
 
   <div class="boxes">
-    <div class="box">
+    <div class="box" (click)="clickBox(1)">
       <img src="../../../assets/images/need-know.jpg">
       <div class="float-content">
         <div class="title">Lo que tengo que saber</div>
       </div>
     </div>
 
-    <div class="box">
+    <div class="box" (click)="clickBox(2)">
       <img src="../../../assets/images/need-learn.jpg">
       <div class="float-content">
         <div class="title">Lo que tengo que aprender</div>
       </div>
     </div>
 
-    <div class="box">
+    <div class="box" (click)="clickBox(3)">
       <img src="../../../assets/images/need-do.jpg">
       <div class="float-content">
         <div class="title">Lo que tengo que hacer</div>
@@ -30,11 +30,9 @@
   <div class="statistics">
     <div class="title">Lo que he conseguido</div>
     <div class="container">
-      <div class="policies"></div>
-
-      <div class="awards"></div>
-
-      <div class="bonus"></div>
+      <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="doughnutChartOptions"
+        [legend]="doughnutChartLegend" [chartType]="doughnutChartType" [colors]="colors">
+      </canvas>
     </div>
   </div>
 </div>
