@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private menuCtrl: MenuController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  toggleMenu() {
+    this.menuCtrl.toggle();
+  }
 
 }

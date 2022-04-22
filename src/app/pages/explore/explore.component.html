@@ -1,4 +1,21 @@
-<app-header></app-header>
-<p>
-  explore works!
-</p>
+<div class="section-container">
+  <div class="top-content">
+    <div class="section-name">Campañas</div>
+    <ion-icon class="open-menu" name="person-circle-outline" (click)="toggleMenu()"></ion-icon>
+  </div>
+  <div class="scrolling-wrapper">
+    <div class="card" *ngFor="let tab of tabs; let pos = index;" [ngClass]="{'active': pos === activeTab}"
+      (click)="changeTab(pos)">
+      <img class="post-thumb" src="../../../assets/icon/{{tab.icon}}">
+      <p class="body">
+        {{tab.title}}
+      </p>
+    </div>
+  </div>
+</div>
+
+<app-menu></app-menu>
+
+<ion-content scrollEvents="true" overflow-scroll="true">
+  <section #pageContainer></section>
+</ion-content>

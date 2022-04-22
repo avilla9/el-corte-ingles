@@ -16,9 +16,9 @@ export class HideHeaderDirective implements OnInit {
 
   ngOnInit(): void {
     this.header = this.header.el;
-    /* this.domCtrl.write(() => {
-      this.renderer.setStyle(this.header, 'transition', 'margin-top 200ms');
-    }); */
+    this.domCtrl.write(() => {
+      this.renderer.setStyle(this.header, 'transition', 'margin-top 700ms');
+    });
   }
 
   @HostListener('ionScroll', ['$event']) onContentScroll($event: any) {
