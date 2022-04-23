@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-access',
@@ -7,8 +9,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessComponent implements OnInit {
 
-  constructor() { }
+  posts: any = [
+    {
+      title: 'Salesforce',
+      url: ': https://identity-services.elcorteingles.es/samlsso?spEntityID=https://eciseguros.my.salesforce.com',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Talento Mobile',
+      url: 'https://www.ecisegurostm.elcorteingles.es/mediadores',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Buzón amigo',
+      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Aneto',
+      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Seguroteca',
+      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Utilidades',
+      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Aul@ ECI',
+      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
+      img: 'yellow.png',
+    },
+    {
+      title: 'MyIT',
+      url: 'https://elcorteingles-dwp.onbmc.com/',
+      img: 'yellow.png',
+    },
+    {
+      title: 'Gestión de credenciales',
+      url: 'https://nexo.elcorteingles.es/jgestioncredenciales/gestioncredenciales/Inicio',
+      img: 'yellow.png',
+    },
+  ];
 
-  ngOnInit() {}
+  constructor(
+    public navCtrl: NavController,
+    private iab: InAppBrowser,
+  ) { }
 
+  ngOnInit() {
+  }
+
+  externalPost(url) {
+    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#00ff00');
+  }
 }
