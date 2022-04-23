@@ -1,0 +1,28 @@
+<ion-content [scrollEvents]="true">
+  <div class="container">
+    <div class="navigation-menu">
+      <div class="section-ref" *ngFor="let section of data" (click)="scrollToLabel(section.id)">
+        {{section.title}}
+      </div>
+    </div>
+    <div class="section-container">
+      <div class="section" *ngFor="let section of data" id="{{section.id}}">
+        <div class="section-name">{{section.title}}</div>
+        <div class="subtitle">{{section.subtitle}}</div>
+        <div class="scrolling-wrapper">
+          <div class="card" *ngFor="let article of section.articles" (click)="clickPost(article)">
+            <img class="post-thumb" src="../../../assets/images/{{article.img}}">
+            <div class="content">
+              <p class="title">{{article.title}}</p>
+              <p class="body">{{article.short_description}}</p>
+            </div>
+            <div class="icons">
+              <ion-icon class="icon" name="heart-outline"></ion-icon>
+              <ion-icon class="icon" name="share-social-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

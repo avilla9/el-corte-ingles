@@ -5,6 +5,7 @@ import { CampaignComponent } from '../campaign/campaign.component';
 import { RewardsComponent } from '../rewards/rewards.component';
 import { RoomsComponent } from '../rooms/rooms.component';
 import { AccessComponent } from '../access/access.component';
+import { KnowledgeComponent } from '../knowledge/knowledge.component';
 
 @Component({
   selector: 'app-explore',
@@ -25,6 +26,11 @@ export class ExploreComponent implements OnInit {
     {
       component: AdoptionComponent,
       title: 'Adopción',
+      icon: 'add.svg',
+    },
+    {
+      component: KnowledgeComponent,
+      title: 'Conocimiento',
       icon: 'head.svg',
     },
     {

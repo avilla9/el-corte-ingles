@@ -14,6 +14,7 @@ import { AccessComponent } from './access/access.component';
 import { ChartsModule } from 'ng2-charts';
 import { HeaderComponent } from '../components/header/header.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { KnowledgeComponent } from './knowledge/knowledge.component';
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -21,6 +22,7 @@ const ENTRYCOMPONENTS = [
   RewardsComponent,
   RoomsComponent,
   AccessComponent,
+  KnowledgeComponent,
 ];
 
 const COMPONENTS = [ExploreComponent];
