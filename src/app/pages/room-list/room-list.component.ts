@@ -3,11 +3,11 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss'],
+  selector: 'app-room-list',
+  templateUrl: './room-list.component.html',
+  styleUrls: ['./room-list.component.scss'],
 })
-export class PostListComponent implements OnInit {
+export class RoomListComponent implements OnInit {
 
   list: any;
 
@@ -18,12 +18,12 @@ export class PostListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.list = JSON.parse(localStorage.getItem("post-list"));
+    this.list = JSON.parse(localStorage.getItem("room"));
   }
 
   ionViewDidEnter() {
     console.log(this.list);
-    this.list = JSON.parse(localStorage.getItem("post-list"));
+    this.list = JSON.parse(localStorage.getItem("room"));
   }
 
   toggleMenu() {
