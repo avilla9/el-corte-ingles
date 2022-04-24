@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
+  redirect(page) {
+    this.navCtrl.navigateForward(page);
+  }
 }

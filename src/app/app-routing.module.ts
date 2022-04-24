@@ -5,6 +5,7 @@ import { ExploreComponent } from './pages/explore/explore.component';
 import { PostComponent } from './pages/post/post.component';
 import { PostListComponent } from './pages/post-list/post-list.component';
 import { RoomListComponent } from './pages/room-list/room-list.component';
+import { MailboxComponent } from './pages/mailbox/mailbox.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'explora', component: ExploreComponent },
   { path: 'post-list', component: PostListComponent },
   { path: 'room-list', component: RoomListComponent },
+  { path: 'mailbox', component: MailboxComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 

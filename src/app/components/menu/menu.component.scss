@@ -28,16 +28,32 @@ ion-menu {
     --background: var(--ion-color-light-contrast);
   }
 
-  ion-list {
-    ion-item {
-      margin-bottom: 4vw;
+  ion-content {
+    position: relative;
+
+    ion-list {
+      ion-item {
+        margin-bottom: 4vw;
+      }
+
+      ion-icon {
+        width: 8vw;
+        height: 8vw;
+        color: var(--ion-color-light);
+        margin-right: 4vw;
+      }
     }
 
-    ion-icon {
-      width: 8vw;
-      height: 8vw;
-      color: var(--ion-color-light);
-      margin-right: 4vw;
+    .footer {
+      display: flex;
+      position: absolute;
+      bottom: 4vw;
+      padding: 0 12vw;
+      justify-content: center;
+
+      img {
+        width: 100%;
+      }
     }
   }
 }

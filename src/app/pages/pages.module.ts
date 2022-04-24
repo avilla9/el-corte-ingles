@@ -16,6 +16,7 @@ import { HeaderComponent } from '../components/header/header.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { KnowledgeComponent } from './knowledge/knowledge.component';
 import { RoomListComponent } from './room-list/room-list.component';
+import { MailboxComponent } from './mailbox/mailbox.component';
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -34,6 +35,7 @@ const COMPONENTS = [ExploreComponent];
     PostComponent,
     PostListComponent,
     RoomListComponent,
+    MailboxComponent,
     COMPONENTS,
     ENTRYCOMPONENTS,
     /* ExploreComponent,

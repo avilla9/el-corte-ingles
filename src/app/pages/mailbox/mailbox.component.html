@@ -1,0 +1,21 @@
+<div class="section-container">
+  <div class="top-content">
+    <div class="section-name">Buzón</div>
+    <ion-icon class="open-menu" name="person-circle-outline" (click)="toggleMenu()"></ion-icon>
+  </div>
+  <div class="help">¿En qué podemos ayudarte?</div>
+</div>
+
+<app-menu></app-menu>
+
+<ion-content scrollEvents="true" overflow-scroll="true">
+  <div class="mail-form">
+    <ion-select value="Sugest" multiple="false" placeholder="Sugerencia/Incidencia" class="selector">
+      <ion-select-option value="camp1">Sugerencia</ion-select-option>
+      <ion-select-option value="camp2">Incidencia</ion-select-option>
+    </ion-select>
+    <ion-input placeholder="Código de Agente"></ion-input>
+    <textarea class="description" placeholder="Describe qué necesitas" cols="30" rows="10"></textarea>
+    <button class="send">Enviar</button>
+  </div>
+</ion-content>
