@@ -1,6 +1,6 @@
 <ion-content overflow-scroll="true">
   <div class="container">
-    <div class="post-list" *ngFor="let post of posts" (click)="clickPost(post)">
+    <div class="post-list" *ngFor="let post of posts" (click)="post.authorized ? clickPost(post) : showAlert()">
       <img src="../../../assets/images/{{post.img}}">
       <div class="content">
         <div class="title">{{post.title}}</div>

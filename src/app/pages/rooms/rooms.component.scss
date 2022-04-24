@@ -1,5 +1,6 @@
 .container {
   padding: 4vw;
+
   .post-list {
     display: flex;
     flex-direction: row;
@@ -15,7 +16,7 @@
       border-radius: 2vw;
       margin-right: 2vw;
     }
-    
+
     .content {
       width: 60vw;
 
@@ -29,5 +30,9 @@
         font-size: 3vw;
       }
     }
+  }
+
+  .unautorized {
+    background-color: red;
   }
 }
