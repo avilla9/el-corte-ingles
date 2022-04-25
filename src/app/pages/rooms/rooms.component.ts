@@ -330,7 +330,7 @@ await alert.present(); */
   }
 
   async showAlert() {
-    var mapUrl = '../../../assets/images/unauth.png';
+    var mapUrl = '../../../assets/images/unauth.gif';
     const alert = await this.alertController.create({
       message: `<div class="unauth-title">¡En esta no puedes entrar!</div> <img src="${mapUrl}" class="unauth-alert">`,
       buttons: ['Cerrar']

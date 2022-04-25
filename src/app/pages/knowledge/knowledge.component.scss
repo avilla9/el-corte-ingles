@@ -10,7 +10,7 @@
     width: fit-content;
     padding: 1vw 4vw;
     margin: 0 2vw 0 0;
-    background-color: #c9c7c7;
+    background-color: #E7E6E6;
     border-radius: 2vw;
   }
 }
@@ -29,7 +29,7 @@
     .section-name {
       font-size: 24px;
       margin-bottom: 2vw;
-      width: fit-content;
+      width: calc(100% - 4vw);
       padding: 1vw 2vw;
       border-radius: 2vw;
       background-color: var(--ion-color-primary);
