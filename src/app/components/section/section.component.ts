@@ -37,8 +37,8 @@ export class SectionComponent implements OnInit {
           'date': '',
           'description': 'Seguro que tus clientes hay términos que aún no comprenden. Incluso puede que haya algunos que a ti también se te escapen porque se han visto modificados en los últimos años. Si este es el caso, aquí tienes la guía definitiva, un glosario de términos elaborado por la asociación empresarial del seguro, UNESPA.',
           'cta': 'Descárgatela ya',
-          'cta-content': 'https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf',
-          'internal-route': '',
+          'cta_content': 'https://www.estamos-seguros.es/main-files/uploads/2019/04/Te%CC%81rminos.pdf',
+          'internal_route': '',
           'img': '3.jpg'
         };
         this.interalPost(data);
@@ -63,8 +63,8 @@ export class SectionComponent implements OnInit {
           'date': '25 de Abril de 2021',
           'description': 'Esta aplicación es para ti, para que puedas conocer todas las campañas en las que estás participando, para que sepas, quieras y puedas adoptar una nueva herramienta, para que seas recompensado, para que accedas a contenido exclusivo para ti, por ser tú... Descubre todo lo que tiene, explórala, ¡úsala en tu día a día, te ayudará a lograr el éxito comercial que estás buscando!',
           'cta': 'Explora',
-          'cta-content': '',
-          'internal-route': 'explora',
+          'cta_content': '',
+          'internal_route': 'explora',
           'img': '7.jpg'
         }
         this.interalPost(data);

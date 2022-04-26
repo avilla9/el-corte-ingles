@@ -38,8 +38,8 @@ export class RoomListComponent implements OnInit {
       'date': '',
       'description': post.description,
       'cta': '',
-      'cta-content': '',
-      'internal-route': '',
+      'cta_content': '',
+      'internal_route': '',
       'img': post.img,
     }
     localStorage.setItem('post', JSON.stringify(data));

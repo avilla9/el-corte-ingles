@@ -30,20 +30,21 @@ export class PostListComponent implements OnInit {
     this.menuCtrl.toggle();
   }
 
-  clickPost(post) {
-    let data = {};
-    localStorage.removeItem('post');
-    data = {
-      'title': post.title,
-      'date': '',
-      'description': post.description,
-      'cta': '',
-      'cta-content': '',
-      'internal-route': '',
-      'img': post.img,
+  clickPost(article) {
+    if (article.link.length) {
+      this.externalPost(article.link)
+    } else {
+      localStorage.removeItem('post');
+      this.interalPost(article)
     }
-    localStorage.setItem('post', JSON.stringify(data));
-    console.log(data);
+  }
+
+  externalPost(url) {
+    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#00ff00');
+  }
+
+  interalPost(article) {
+    localStorage.setItem('post', JSON.stringify(article));
     this.navCtrl.navigateForward("/post");
   }
 }
