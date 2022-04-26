@@ -8,28 +8,81 @@ import { ChartType } from 'chart.js';
   styleUrls: ['./campaign.component.scss'],
 })
 export class CampaignComponent implements OnInit {
-  doughnutChartLabels: string[] = [
-    'Pólizas',
-    'Restan',
-  ];
-  doughnutChartOptions: any = {
-    borderWidth: 1,
-    maintainAspectRatio: true,
-    cutoutPercentage: 50,
-  };
-  responsive: true;
-  doughnutChartData: number[] = [84, 150];
-  doughnutChartType: ChartType = 'doughnut';
-  doughnutChartLegend: boolean = true;
-  colors: any = [
+  statistics: any = [
     {
-      backgroundColor: [
-        'rgb(0, 0, 0)',
-        '#bababa',
-        '#06d79c',
-        'rgb(236, 239, 241)'
-      ]
-    }
+      title: 'Pólizas',
+      parameter: '75%',
+      doughnutChartLabels: [
+        'Ventas',
+        'Restan',
+      ],
+      doughnutChartData: [9, 3],
+      doughnutChartOptions: {
+        borderWidth: 1,
+        maintainAspectRatio: true,
+        cutoutPercentage: 70,
+        aspectRatio: 1,
+      },
+      doughnutChartType: 'doughnut',
+      responsive: true,
+      doughnutChartLegend: false,
+      colors: [
+        {
+          backgroundColor: [
+            'rgb(0, 0, 0)',
+            '#bababa',
+          ]
+        }
+      ],
+    },
+    {
+      title: 'Primas',
+      parameter: '1.567 €',
+      doughnutChartLabels: [
+        'Primas',
+      ],
+      doughnutChartData: [100],
+      doughnutChartOptions: {
+        borderWidth: 1,
+        maintainAspectRatio: true,
+        cutoutPercentage: 70,
+        aspectRatio: 1,
+      },
+      doughnutChartType: 'doughnut',
+      responsive: true,
+      doughnutChartLegend: false,
+      colors: [
+        {
+          backgroundColor: [
+            'rgb(0, 0, 0)',
+          ]
+        }
+      ],
+    },
+    {
+      title: 'Incentivo',
+      parameter: '0 €',
+      doughnutChartLabels: [
+        'Incentivo',
+      ],
+      doughnutChartData: [100],
+      doughnutChartOptions: {
+        borderWidth: 1,
+        maintainAspectRatio: true,
+        cutoutPercentage: 70,
+        aspectRatio: 1,
+      },
+      doughnutChartType: 'doughnut',
+      responsive: true,
+      doughnutChartLegend: false,
+      colors: [
+        {
+          backgroundColor: [
+            'rgb(0, 0, 0)',
+          ]
+        }
+      ],
+    },
   ];
 
   data: any = [

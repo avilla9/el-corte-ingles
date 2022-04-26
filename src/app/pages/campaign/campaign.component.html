@@ -13,12 +13,19 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div class="statistics">
-    <div class="title">Lo que he conseguido</div>
-    <div class="container">
-      <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="doughnutChartOptions"
-        [legend]="doughnutChartLegend" [chartType]="doughnutChartType" [colors]="colors">
+<div class="statistics">
+  <div class="title">Lo que he conseguido</div>
+  <div class="scrolling-wrapper">
+    <div class="container" *ngFor="let kpi of statistics">
+      <div class="information">
+        <div class="parameter">{{kpi.parameter}}</div>
+        <div class="title">{{kpi.title}}</div>
+      </div>
+      <canvas baseChart [data]="kpi.doughnutChartData" [labels]="kpi.doughnutChartLabels"
+        [options]="kpi.doughnutChartOptions" [legend]="kpi.doughnutChartLegend" [chartType]="kpi.doughnutChartType"
+        [colors]="kpi.colors">
       </canvas>
     </div>
   </div>
