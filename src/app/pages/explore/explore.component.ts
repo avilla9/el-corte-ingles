@@ -26,7 +26,7 @@ export class ExploreComponent implements OnInit {
     {
       component: AdoptionComponent,
       title: 'Adopción',
-      icon: 'add.svg',
+      icon: 'adopta.svg',
     },
     {
       component: KnowledgeComponent,

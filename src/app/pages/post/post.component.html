@@ -9,7 +9,12 @@
     <ion-card-title>{{post.title}}</ion-card-title>
   </ion-card-header>
 
-  <ion-card-content>{{post.description}}</ion-card-content>
-  <!-- <ion-card>
-  </ion-card> -->
+  <ion-card-content [innerHTML]="post.description"></ion-card-content>
+
+  <div class="cta" *ngIf="post.cta?.length">
+    <button (click)="post.ctaContent?.length && externalPost(post.ctaContent)">
+      {{post.cta}}
+    </button>
+  </div>
+
 </ion-content>
