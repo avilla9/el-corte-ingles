@@ -8,26 +8,191 @@ import { ChartType } from 'chart.js';
   styleUrls: ['./adoption.component.scss'],
 })
 export class AdoptionComponent implements OnInit {
-  doughnutChartLabels: string[] = [
-    'Pólizas',
-    'Restan',
-  ];
-  doughnutChartOptions: any = {
-    borderWidth: 1,
-    maintainAspectRatio: true,
-    cutoutPercentage: 50,
-  };
-  responsive: true;
-  doughnutChartData: number[] = [84, 150];
-  doughnutChartType: ChartType = 'doughnut';
-  doughnutChartLegend: boolean = true;
-  colors: any = [
+  statistics: any = [
     {
-      backgroundColor: [
-        'rgb(0, 0, 0)',
-        '#bababa',
-        '#06d79c',
-        'rgb(236, 239, 241)'
+      title: 'Pólizas',
+      parameter: '75%',
+      doughnutChartLabels: [
+        'Ventas',
+        'Restan',
+      ],
+      doughnutChartData: [9, 3],
+      doughnutChartOptions: {
+        borderWidth: 1,
+        maintainAspectRatio: true,
+        cutoutPercentage: 70,
+        aspectRatio: 1,
+      },
+      doughnutChartType: 'doughnut',
+      responsive: true,
+      doughnutChartLegend: false,
+      colors: [
+        {
+          backgroundColor: [
+            'rgb(0, 0, 0)',
+            '#bababa',
+          ]
+        }
+      ],
+    },
+    {
+      title: 'Primas',
+      parameter: '1.567 €',
+      doughnutChartLabels: [
+        'Primas',
+      ],
+      doughnutChartData: [100],
+      doughnutChartOptions: {
+        borderWidth: 1,
+        maintainAspectRatio: true,
+        cutoutPercentage: 70,
+        aspectRatio: 1,
+      },
+      doughnutChartType: 'doughnut',
+      responsive: true,
+      doughnutChartLegend: false,
+      colors: [
+        {
+          backgroundColor: [
+            'rgb(0, 0, 0)',
+          ]
+        }
+      ],
+    },
+    {
+      title: 'Incentivo',
+      parameter: '0 €',
+      doughnutChartLabels: [
+        'Incentivo',
+      ],
+      doughnutChartData: [100],
+      doughnutChartOptions: {
+        borderWidth: 1,
+        maintainAspectRatio: true,
+        cutoutPercentage: 70,
+        aspectRatio: 1,
+      },
+      doughnutChartType: 'doughnut',
+      responsive: true,
+      doughnutChartLegend: false,
+      colors: [
+        {
+          backgroundColor: [
+            'rgb(0, 0, 0)',
+          ]
+        }
+      ],
+    },
+  ];
+
+  data: any = [
+    {
+      id: 1,
+      parentTitle: 'Lo que tengo que saber',
+      img: 'adoption/need-know.jpg',
+      list: [
+        {
+          id: 1,
+          img: 'adoption/1.png',
+          title: 'Luis, Fran y Ana tienen algo que decirte',
+          description: '¿Sabes qué cuáles son las 9 Razones por las que ser Agente de SECI?',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+        {
+          id: 2,
+          img: 'adoption/3.png',
+          title: 'Preguntas frecuentes',
+          description: 'Y otras dudas que te pueden surgir',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+        {
+          id: 3,
+          img: 'adoption/4.png',
+          title: 'Vídeo #VenteaSECI',
+          description: 'Conoce la nueva herramienta #VenteaSECI',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+        {
+          id: 4,
+          img: 'adoption/4.png',
+          title: 'Inforgrafía #VenteaSECI',
+          description: 'Descárgala ya',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+      ]
+    },
+    {
+      id: 2,
+      parentTitle: 'Lo que tengo que aprender',
+      img: 'adoption/need-learn.jpg',
+      list: [
+        {
+          id: 1,
+          img: 'adoption/2.png',
+          title: 'Las 9 Razones de un vistazo',
+          description: "¡Descárgatelas!",
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+      ]
+    },
+    {
+      id: 3,
+      parentTitle: 'Lo que tengo que hacer',
+      img: 'adoption/need-do.jpg',
+      list: [
+        {
+          id: 1,
+          img: 'adoption/1.png',
+          title: 'Reto: gana 50€',
+          description: 'Los 50 agentes más rápidos en responder, entrarán en un sorteo de 50€. ¡A POR ELLO!',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+        {
+          id: 2,
+          img: 'adoption/4.png',
+          title: 'Capta, recluta y llévate 300€',
+          description: 'Accede aquí a Vente a SECI. #Pásalo',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
+        {
+          id: 3,
+          img: 'adoption/1.png',
+          title: 'Recursos a tu disposición',
+          description: 'Accede a todo lo he hemos preparado para que puedas captar, reclutar y ganar!',
+          date: '',
+          cta: '',
+          cta_content: '',
+          internal_route: '',
+          link: '',
+        },
       ]
     }
   ];
@@ -38,88 +203,9 @@ export class AdoptionComponent implements OnInit {
 
   ngOnInit() { }
 
-  clickBox(id) {
-    let data = {};
+  clickBox(list) {
     localStorage.clear();
-
-    switch (id) {
-      case 1:
-        data = {
-          parentTitle: 'Lo que tengo que saber',
-          list: [
-            {
-              id: 1,
-              img: 'post-list1.jpg',
-              title: 'AHORA, PÍDELE SALIR',
-              description: 'Porque las primeras impresiones importan, ¡y mucho!',
-            },
-            {
-              id: 2,
-              img: 'post-list2.jpg',
-              title: 'AHORA, PÍDELE SALIR',
-              description: 'Que te diga que sí es una meta y aquí tienes las de la campaña.',
-            },
-            {
-              id: 3,
-              img: 'post-list3.jpg',
-              title: 'AVERIGUA TODO DE ELLA',
-              description: 'Incluso sus partes más ocultas. Aquí tienes las condiciones.',
-            },
-            {
-              id: 4,
-              img: 'post-list4.jpg',
-              title: 'Y POR FIN, ENAMÓRATE',
-              description: '¡Mira todo lo que puedes llegar a ganar! Quién lo iba a decir en la primera cita..',
-            },
-          ]
-        };
-        break;
-
-      case 2:
-        data = {
-          parentTitle: 'Lo que tengo que aprender',
-          list: [
-            {
-              id: 5,
-              img: 'post-list2.jpg',
-              title: "Lorem ipsum dolor",
-              description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-            },
-            {
-              id: 6,
-              img: 'post-list3.jpg',
-              title: "Lorem ipsum dolor",
-              description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-            },
-          ]
-        };
-        break;
-
-      case 3:
-        data = {
-          parentTitle: 'Lo que tengo que hacer',
-          list: [
-            {
-              id: 7,
-              img: 'post-list4.jpg',
-              title: "Lorem ipsum dolor",
-              description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-            },
-            {
-              id: 8,
-              img: 'post-list1.jpg',
-              title: "Lorem ipsum dolor",
-              description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-            },
-          ]
-        };
-        break;
-
-      default:
-        break;
-    }
-
-    localStorage.setItem('post-list', JSON.stringify(data));
+    localStorage.setItem('post-list', JSON.stringify(list));
     this.navCtrl.navigateForward("/post-list");
   }
 }

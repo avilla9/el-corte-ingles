@@ -12,48 +12,43 @@ export class AccessComponent implements OnInit {
   posts: any = [
     {
       title: 'Salesforce',
-      url: ': https://identity-services.elcorteingles.es/samlsso?spEntityID=https://eciseguros.my.salesforce.com',
-      img: 'yellow.png',
+      url: 'https://identity-services.elcorteingles.es/samlsso?spEntityID=https://eciseguros.my.salesforce.com',
+      img: 'access/salesforce.jpg',
     },
     {
       title: 'Talento Mobile',
       url: 'https://www.ecisegurostm.elcorteingles.es/mediadores',
-      img: 'yellow.png',
+      img: 'access/talento.jpg',
     },
     {
       title: 'Buzón amigo',
-      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
-      img: 'yellow.png',
+      url: '',
+      img: 'access/buzon.jpg',
     },
     {
       title: 'Aneto',
-      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
-      img: 'yellow.png',
-    },
-    {
-      title: 'Seguroteca',
-      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
-      img: 'yellow.png',
+      url: '',
+      img: 'access/aneto.jpg',
     },
     {
       title: 'Utilidades',
-      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
-      img: 'yellow.png',
+      url: '',
+      img: 'access/utilidades.jpg',
     },
     {
       title: 'Aul@ ECI',
-      url: 'https://es.wikipedia.org/wiki/Wikipedia:Portada',
-      img: 'yellow.png',
+      url: '',
+      img: 'access/aula.jpg',
     },
     {
       title: 'MyIT',
       url: 'https://elcorteingles-dwp.onbmc.com/',
-      img: 'yellow.png',
+      img: 'access/myit.jpg',
     },
     {
       title: 'Gestión de credenciales',
       url: 'https://nexo.elcorteingles.es/jgestioncredenciales/gestioncredenciales/Inicio',
-      img: 'yellow.png',
+      img: 'access/gestion.jpg',
     },
   ];
 
@@ -66,6 +61,8 @@ export class AccessComponent implements OnInit {
   }
 
   externalPost(url) {
-    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#00ff00');
+    if (url?.length) {
+      this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
+    }
   }
 }

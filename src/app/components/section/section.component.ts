@@ -64,6 +64,7 @@ export class SectionComponent implements OnInit {
           'description': 'Esta aplicación es para ti, para que puedas conocer todas las campañas en las que estás participando, para que sepas, quieras y puedas adoptar una nueva herramienta, para que seas recompensado, para que accedas a contenido exclusivo para ti, por ser tú... Descubre todo lo que tiene, explórala, ¡úsala en tu día a día, te ayudará a lograr el éxito comercial que estás buscando!',
           'cta': 'Explora',
           'cta_content': '',
+          'cta_intern_link': '/explora',
           'internal_route': 'explora',
           'img': '7.jpg'
         }
@@ -77,7 +78,7 @@ export class SectionComponent implements OnInit {
 
   externalPost(url) {
     /* window.open(url, '_system'); */
-    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#00ff00');
+    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
   interalPost(data) {

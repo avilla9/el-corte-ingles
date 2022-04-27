@@ -40,7 +40,7 @@ export class PostListComponent implements OnInit {
   }
 
   externalPost(url) {
-    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#00ff00');
+    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
   interalPost(article) {

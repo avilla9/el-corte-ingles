@@ -1,37 +1,31 @@
 <div class="content">
-  <ion-select value="Campañas" multiple="false" placeholder="CAMPAÑAS" class="selector">
-    <ion-select-option value="camp1">Campaña 1</ion-select-option>
-    <ion-select-option value="camp2">Campaña 2</ion-select-option>
+  <ion-select value="Campañas" multiple="false" placeholder="Capacitación y Reclutamiento" class="selector">
+    <ion-select-option value="capacitacion-reclutamiento">
+      Capacitación y Reclutamiento
+    </ion-select-option>
   </ion-select>
 
   <div class="boxes">
-    <div class="box" (click)="clickBox(1)">
-      <img src="../../../assets/images/post-list1.jpg">
+    <div class="box" *ngFor="let box of data" (click)="clickBox(box)">
+      <img src="../../../assets/images/{{box.img}}">
       <div class="float-content">
-        <div class="title">Lo que tengo que saber</div>
-      </div>
-    </div>
-
-    <div class="box" (click)="clickBox(2)">
-      <img src="../../../assets/images/post-list2.jpg">
-      <div class="float-content">
-        <div class="title">Lo que tengo que aprender</div>
-      </div>
-    </div>
-
-    <div class="box" (click)="clickBox(3)">
-      <img src="../../../assets/images/post-list3.jpg">
-      <div class="float-content">
-        <div class="title">Lo que tengo que hacer</div>
+        <div class="title">{{box.parentTitle}}</div>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="statistics">
-    <div class="title">Lo que he conseguido</div>
-    <div class="container">
-      <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="doughnutChartOptions"
-        [legend]="doughnutChartLegend" [chartType]="doughnutChartType" [colors]="colors">
+<div class="statistics">
+  <div class="title">Lo que he conseguido</div>
+  <div class="scrolling-wrapper">
+    <div class="container" *ngFor="let kpi of statistics">
+      <div class="information">
+        <div class="parameter">{{kpi.parameter}}</div>
+        <div class="title">{{kpi.title}}</div>
+      </div>
+      <canvas baseChart [data]="kpi.doughnutChartData" [labels]="kpi.doughnutChartLabels"
+        [options]="kpi.doughnutChartOptions" [legend]="kpi.doughnutChartLegend" [chartType]="kpi.doughnutChartType"
+        [colors]="kpi.colors">
       </canvas>
     </div>
   </div>
