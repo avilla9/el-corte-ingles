@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'el-corte-ingles',
+  appName: 'SECI Point',
   webDir: 'www',
   bundledWebRuntime: false
 };
