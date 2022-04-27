@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'post', component: PostComponent },
   { path: 'explora', component: ExploreComponent },
+  { path: 'accesos', component: ExploreComponent },
   { path: 'post-list', component: PostListComponent },
   { path: 'room-list', component: RoomListComponent },
   { path: 'mailbox', component: MailboxComponent },

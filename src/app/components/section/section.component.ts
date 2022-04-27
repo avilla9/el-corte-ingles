@@ -20,7 +20,7 @@ export class SectionComponent implements OnInit {
 
   clickPost(id) {
     let data = {};
-    localStorage.clear();
+    localStorage.removeItem('post');
 
     switch (id) {
       case 1:

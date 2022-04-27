@@ -58,10 +58,15 @@ export class ExploreComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.changeTab(0);
+    if (localStorage.getItem('lastTab')) {
+      this.changeTab(parseInt(localStorage.getItem('lastTab')));
+    } else {
+      this.changeTab(0);
+    }
   }
 
   changeTab(pos) {
+    localStorage.setItem('lastTab', pos);
     this.activeTab = pos;
     this.currentTitle = this.tabs[pos].title;
     this.pageContainer.clear();

@@ -204,7 +204,7 @@ export class AdoptionComponent implements OnInit {
   ngOnInit() { }
 
   clickBox(list) {
-    localStorage.clear();
+    localStorage.removeItem('post-list');
     localStorage.setItem('post-list', JSON.stringify(list));
     this.navCtrl.navigateForward("/post-list");
   }
