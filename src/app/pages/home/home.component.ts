@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,10 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private menuCtrl: MenuController) { }
+  constructor(
+    private menuCtrl: MenuController,
+    public navCtrl: NavController
+  ) { }
 
   ngOnInit() { }
 
@@ -16,4 +19,8 @@ export class HomeComponent implements OnInit {
     this.menuCtrl.toggle();
   }
 
+  toExplore() {
+    localStorage.setItem('lastTab', '0');
+    this.navCtrl.navigateForward('/explora');
+  }
 }
