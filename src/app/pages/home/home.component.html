@@ -3,7 +3,12 @@
     <img class="logo" src="../../../assets/icon/eci-white.svg" />
     <ion-icon class="open-menu" name="person-circle-outline" (click)="toggleMenu()"></ion-icon>
   </div>
-  <div class="hideable" #header>
+</ion-header>
+
+<app-menu></app-menu>
+
+<ion-content scrollEvents="true" overflow-scroll="true">
+  <div class="hideable">
     <div class="greetings">
       <div class="hello">Hola,</div>
       <div class="user">Beltrán Álvarez</div>
@@ -11,11 +16,6 @@
     <div class="to-do">¿Qué quieres hacer hoy?</div>
     <button (click)="toExplore()">Explora</button>
   </div>
-</ion-header>
-
-<app-menu></app-menu>
-
-<ion-content scrollEvents="true" appHideHeader [header]="header" overflow-scroll="true">
   <app-section></app-section>
   <ion-footer class="ion-no-border">
     <span>2022 Created by</span>

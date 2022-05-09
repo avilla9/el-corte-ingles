@@ -7,13 +7,14 @@ import { PostListComponent } from './pages/post-list/post-list.component';
 import { RoomListComponent } from './pages/room-list/room-list.component';
 import { MailboxComponent } from './pages/mailbox/mailbox.component';
 import { AlertsComponent } from './pages/alerts/alerts.component';
+import { AccessComponent } from './pages/access/access.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'post', component: PostComponent },
   { path: 'explora', component: ExploreComponent },
-  { path: 'accesos', component: ExploreComponent },
+  { path: 'accesos', component: AccessComponent },
   { path: 'post-list', component: PostListComponent },
   { path: 'room-list', component: RoomListComponent },
   { path: 'mailbox', component: MailboxComponent },

@@ -55,9 +55,14 @@ export class AccessComponent implements OnInit {
   constructor(
     public navCtrl: NavController,
     private iab: InAppBrowser,
+    private menuCtrl: MenuController
   ) { }
 
   ngOnInit() {
+  }
+
+  toggleMenu() {
+    this.menuCtrl.toggle();
   }
 
   externalPost(url) {

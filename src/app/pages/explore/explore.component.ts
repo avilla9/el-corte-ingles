@@ -43,11 +43,6 @@ export class ExploreComponent implements OnInit {
       title: 'Salas',
       icon: 'estrella.svg',
     },
-    {
-      component: AccessComponent,
-      title: 'Accesos',
-      icon: 'iniciar-sesion.svg',
-    },
   ]
 
   constructor(

@@ -11,8 +11,4 @@ export class TabsComponent implements OnInit {
   constructor(public navCtrl: NavController) { }
 
   ngOnInit() {}
-
-  toAccess() {
-    localStorage.setItem('lastTab', '5');
-  }
 }
