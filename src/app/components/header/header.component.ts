@@ -8,7 +8,7 @@ import { MenuController, NavController } from '@ionic/angular';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private menuCtrl: MenuController, public navCtrl: NavController) { }
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController) { }
 
   ngOnInit() { }
 

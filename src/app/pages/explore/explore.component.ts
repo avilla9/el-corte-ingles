@@ -46,7 +46,7 @@ export class ExploreComponent implements OnInit {
   ]
 
   constructor(
-    private menuCtrl: MenuController,
+    public menuCtrl: MenuController,
   ) { }
 
   ngOnInit() {

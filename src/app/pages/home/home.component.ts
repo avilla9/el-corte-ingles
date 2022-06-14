@@ -9,7 +9,7 @@ import { MenuController, NavController } from '@ionic/angular';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private menuCtrl: MenuController,
+    public menuCtrl: MenuController,
     public navCtrl: NavController
   ) { }
 

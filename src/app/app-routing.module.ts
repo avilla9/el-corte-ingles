@@ -8,6 +8,7 @@ import { RoomListComponent } from './pages/room-list/room-list.component';
 import { MailboxComponent } from './pages/mailbox/mailbox.component';
 import { AlertsComponent } from './pages/alerts/alerts.component';
 import { AccessComponent } from './pages/access/access.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'room-list', component: RoomListComponent },
   { path: 'mailbox', component: MailboxComponent },
   { path: 'alerts', component: AlertsComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 

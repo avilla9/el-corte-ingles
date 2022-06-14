@@ -8,7 +8,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class MailboxComponent implements OnInit {
 
-  constructor(private menuCtrl: MenuController,) { }
+  constructor(public menuCtrl: MenuController,) { }
 
   ngOnInit() {}
 

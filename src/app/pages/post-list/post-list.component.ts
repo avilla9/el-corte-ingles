@@ -12,7 +12,7 @@ export class PostListComponent implements OnInit {
   list: any;
 
   constructor(
-    private menuCtrl: MenuController,
+    public menuCtrl: MenuController,
     public navCtrl: NavController,
     private iab: InAppBrowser
   ) { }
