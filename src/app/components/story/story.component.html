@@ -1,0 +1,9 @@
+<ion-content>
+  <div class="story-content" style="background-image:url({{img[pos]}});">
+    <img src="{{img[pos]}}">
+    <div class="navigation-direction">
+      <div class="left" (click)="changeStory('prev')"></div>
+      <div class="right" (click)="changeStory('next')"></div>
+    </div>
+  </div>
+</ion-content>

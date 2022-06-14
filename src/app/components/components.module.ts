@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { StoryComponent } from './story/story.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { TabsComponent } from './tabs/tabs.component';
     HeaderComponent,
     MenuComponent,
     TabsComponent,
+    StoryComponent,
   ],
   exports: [
     SectionComponent,
