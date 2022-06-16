@@ -4,15 +4,57 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+
+  .progress {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+    padding: 0 12px 0 16px;
+    display: flex;
+
+    .bar {
+      width: 100%;
+      margin-right: 4px;
+
+      ion-progress-bar {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .bg-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    transform: scale(1.1);
+  }
 
   .navigation-direction {
     position: absolute;
     height: 100%;
     width: 100%;
     display: flex;
+    z-index: 3;
 
-    .right, .left {
+    .right,
+    .left {
+      position: relative;
       width: 100%;
     }
+  }
+
+  img {
+    z-index: 2;
   }
 }

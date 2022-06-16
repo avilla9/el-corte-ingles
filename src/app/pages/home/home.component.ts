@@ -9,7 +9,17 @@ import { StoryComponent } from '../../components/story/story.component';
 })
 export class HomeComponent implements OnInit {
 
-  images: any = ['../../../assets/images/1.jpg', '../../../assets/images/2.jpg', '../../../assets/images/3.jpg', '../../../assets/images/4.jpg', '../../../assets/images/5.jpg', '../../../assets/images/6.jpg', '../../../assets/images/7.jpg'];
+  images: any = [
+    '../../../assets/images/1.jpg',
+    '../../../assets/images/2.jpg',
+    '../../../assets/images/3.jpg',
+    '../../../assets/images/4.jpg',
+    '../../../assets/images/5.jpg',
+    '../../../assets/images/6.jpg',
+    '../../../assets/images/7.jpg',
+  ];
+
+  visited = Array(this.images.length);
 
   constructor(
     public menuCtrl: MenuController,
@@ -17,7 +27,9 @@ export class HomeComponent implements OnInit {
     public modalController: ModalController,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.visited)
+  }
 
   toggleMenu() {
     this.menuCtrl.toggle();
@@ -45,5 +57,6 @@ export class HomeComponent implements OnInit {
       .then(modal => {
         modal.present().then();
       });
+    this.visited[position] = true;
   }
 }
