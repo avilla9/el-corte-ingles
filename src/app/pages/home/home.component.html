@@ -17,7 +17,7 @@
     <button (click)="toExplore()">Explora</button>
   </div>
 
-  <div class="story-list">
+  <div class="story-list" *ngIf="images?.length">
     <div class="scroll-horizontal">
       <div class="scroll-item" *ngFor="let img of images; let position = index">
         <ion-avatar (click)="openModal(images, position)" class="avatar-md"
