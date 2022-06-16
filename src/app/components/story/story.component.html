@@ -7,11 +7,19 @@
         <ion-progress-bar *ngIf="i == pos" value="{{progress}}"></ion-progress-bar>
       </div>
     </div>
-    <div class="bg-container" style="background-image:url({{img[pos]}});"></div>
+    <div class="close" (click)="close()">
+      <ion-icon name="close-outline"></ion-icon>
+    </div>
+    <div class="bg-container" style="background-image:url({{img[pos].src}});"></div>
     <div class="navigation-direction">
       <div class="left" (click)="changeStory('prev')"></div>
       <div class="right" (click)="changeStory('next')"></div>
     </div>
-    <img src="{{img[pos]}}">
+    <img src="{{img[pos].src}}">
+    <div class="open-link" *ngIf="img[pos].link.name?.length" (click)="openLink(img[pos].link)">
+      <div class="name">
+        {{img[pos].link.name}}
+      </div>
+    </div>
   </div>
 </ion-content>

@@ -10,13 +10,69 @@ import { StoryComponent } from '../../components/story/story.component';
 export class HomeComponent implements OnInit {
 
   images: any = [
-    '../../../assets/images/1.jpg',
-    '../../../assets/images/2.jpg',
-    '../../../assets/images/3.jpg',
-    '../../../assets/images/4.jpg',
-    '../../../assets/images/5.jpg',
-    '../../../assets/images/6.jpg',
-    '../../../assets/images/7.jpg',
+    {
+      src: '../../../assets/images/1.jpg',
+      date: '',
+      link: {
+        name: 'PDF',
+        internal: '',
+        external: 'https://drive.google.com/file/d/1oTWf5-6m_P9DvWQOlInJHZ53cT__sPaB/view?usp=sharing',
+      }
+    },
+    {
+      src: '../../../assets/images/2.jpg',
+      date: '',
+      link: {
+        name: 'TVC',
+        internal: '',
+        external: 'https://thevaluescorner.com/',
+      }
+    },
+    {
+      src: '../../../assets/images/3.jpg',
+      date: '',
+      link: {
+        name: '',
+        internal: '',
+        external: '',
+      }
+    },
+    {
+      src: '../../../assets/images/4.jpg',
+      date: '',
+      link: {
+        name: 'Abrir documento',
+        internal: '',
+        external: 'https://drive.google.com/file/d/1ZGg1qskLWm3gtVS-LeEfv_6XEHeHd_vy/view?usp=sharing',
+      }
+    },
+    {
+      src: '../../../assets/images/5.jpg',
+      date: '',
+      link: {
+        name: '',
+        internal: '',
+        external: '',
+      }
+    },
+    {
+      src: '../../../assets/images/6.jpg',
+      date: '',
+      link: {
+        name: '',
+        internal: '',
+        external: '',
+      }
+    },
+    {
+      src: '../../../assets/images/7.jpg',
+      date: '',
+      link: {
+        name: '',
+        internal: '',
+        external: '',
+      }
+    },
   ];
 
   visited = Array(this.images.length);
@@ -41,7 +97,6 @@ export class HomeComponent implements OnInit {
   }
 
   openModal(image, position) {
-    console.log(image);
     this.modalController
       .create(
         {
@@ -52,6 +107,7 @@ export class HomeComponent implements OnInit {
           componentProps: {
             img: image,
             pos: position,
+            visited: this.visited,
           }
         })
       .then(modal => {

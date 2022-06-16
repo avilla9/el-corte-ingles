@@ -16,21 +16,20 @@
     <div class="to-do">¿Qué quieres hacer hoy?</div>
     <button (click)="toExplore()">Explora</button>
   </div>
+
   <div class="story-list">
     <div class="scroll-horizontal">
-      <div class="scroll-item">
-        <ion-avatar class="avatar-md">
-          <img src="https://placeimg.com/640/480/any">
-        </ion-avatar>
-      </div>
       <div class="scroll-item" *ngFor="let img of images; let position = index">
-        <ion-avatar (click)="openModal(images, position)" class="avatar-md" [ngClass]="{'has-update has-status': visited[position] !== true}">
-          <img src="{{img}}">
+        <ion-avatar (click)="openModal(images, position)" class="avatar-md"
+          [ngClass]="{'has-update has-status': visited[position] !== true}">
+          <img src="{{img.src}}">
         </ion-avatar>
       </div>
     </div>
   </div>
+
   <app-section></app-section>
+
   <ion-footer class="ion-no-border">
     <span>2022 Created by</span>
     <img class="tvc-logo" src="../../../assets/icon/tvc-white.svg" />

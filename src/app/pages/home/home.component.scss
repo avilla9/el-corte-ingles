@@ -67,26 +67,36 @@
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+
+    .scroll-item {
+      position: relative;
+      display: inline-block;
+      margin-right: 16px;
+      margin-bottom: 8px;
+      text-align: center;
+
+      ion-avatar {
+        border: 2px solid var(--ion-color-light);
+        padding: 2px;
+        width: 19vw;
+        height: 19vw;
+      }
+
+      ion-avatar {
+        &.has-update {
+          border: 2px solid var(--ion-color-danger);
+        }
+      }
+    }
   }
 
-  .scroll-item {
-    position: relative;
-    display: inline-block;
-    margin-right: 16px;
-    margin-bottom: 8px;
-    text-align: center;
+  .scroll-horizontal::-webkit-scrollbar {
+    display: none;
   }
 
   .item-label {
     font-size: 13px;
     margin-top: 8px;
-  }
-
-  ion-avatar {
-    &.has-update {
-      padding: 2px;
-      border: 2px solid var(--ion-color-danger);
-    }
   }
 }
 
