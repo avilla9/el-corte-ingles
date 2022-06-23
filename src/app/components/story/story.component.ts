@@ -68,11 +68,12 @@ export class StoryComponent implements OnInit {
   }
 
   openLink(link) {
-    if (link.internal?.length) {
+    this.externalPost(link);
+    /* if (link.internal?.length) {
       true;
     } else if (link.external?.length) {
       this.externalPost(link.external);
-    }
+    } */
   }
 
   externalPost(url) {

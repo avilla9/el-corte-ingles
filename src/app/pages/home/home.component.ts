@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { StoryComponent } from '../../components/story/story.component';
+import { StoriesService } from '../../services/stories.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { StoryComponent } from '../../components/story/story.component';
 })
 export class HomeComponent implements OnInit {
 
-  images: any = [
+  /* images: any = [
     {
       src: '../../../assets/images/1.jpg',
       date: '',
@@ -73,17 +74,32 @@ export class HomeComponent implements OnInit {
         external: '',
       }
     },
-  ];
+  ]; */
 
-  visited = Array(this.images.length);
+  images: any;
+
+  visited: any;
 
   constructor(
     public menuCtrl: MenuController,
     public navCtrl: NavController,
     public modalController: ModalController,
+    private stories: StoriesService,
   ) { }
 
   ngOnInit() {
+
+  }
+
+  ionViewDidEnter() {
+    this.stories
+      .getStories()
+      .subscribe((response) => {
+        console.log('get', response);
+        this.images = response;
+        this.visited = Array(this.images.length);
+      });
+
     console.log(this.visited)
   }
 

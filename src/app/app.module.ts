@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 /* import { ChartsModule } from 'ng2-charts'; */
 
@@ -20,6 +21,7 @@ import { environment } from '../environments/environment';
   exports: [],
   entryComponents: [],
   imports: [
+    HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
