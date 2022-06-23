@@ -10,15 +10,15 @@
     <div class="close" (click)="close()">
       <ion-icon name="close-outline"></ion-icon>
     </div>
-    <div class="bg-container" style="background-image:url({{img[pos].src}});"></div>
+    <div class="bg-container" style="background-image:url({{img[pos].media_path}});"></div>
     <div class="navigation-direction">
       <div class="left" (click)="changeStory('prev')"></div>
       <div class="right" (click)="changeStory('next')"></div>
     </div>
-    <img src="{{img[pos].src}}">
-    <div class="open-link" *ngIf="img[pos].link.name?.length" (click)="openLink(img[pos].link)">
+    <img src="{{img[pos].media_path}}">
+    <div class="open-link" *ngIf="img[pos].button_name?.length" (click)="openLink(img[pos].link)">
       <div class="name">
-        {{img[pos].link.name}}
+        {{img[pos].button_name}}
       </div>
     </div>
   </div>

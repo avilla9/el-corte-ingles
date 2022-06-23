@@ -22,7 +22,7 @@
       <div class="scroll-item" *ngFor="let img of images; let position = index">
         <ion-avatar (click)="openModal(images, position)" class="avatar-md"
           [ngClass]="{'has-update has-status': visited[position] !== true}">
-          <img src="{{img.src}}">
+          <img src="{{img.media_path}}">
         </ion-avatar>
       </div>
     </div>
