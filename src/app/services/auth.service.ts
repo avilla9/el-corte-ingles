@@ -44,10 +44,14 @@ export class AuthService {
   /**
    * Revoke the authenticated user token
    */
-  logout() {
+  logout(id) {
     this.options.headers.Authorization = 'Bearer ' + localStorage.getItem('access_token');
     console.log(this.options);
-    return this.http.get(this.apiUrl + '/token/revoke', this.options);
+    return this.http.post(
+      this.apiUrl + '/token/revoke',
+      { id: id },
+      this.options
+    );
   }
 
   userData(id) {

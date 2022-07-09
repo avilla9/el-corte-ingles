@@ -44,12 +44,12 @@ export class MenuComponent implements OnInit {
    */
   logout(): void {
     this.loading = true;
-    this.authService.logout()
+    this.authService.logout(this.user.id)
       .subscribe((res: any) => {
         console.log(res);
-        /* this.loading = false;
+        this.loading = false;
         localStorage.removeItem('access_token');
-        this.router.navigate(['/login']); */
+        this.router.navigate(['/login']);
       });
   }
 
