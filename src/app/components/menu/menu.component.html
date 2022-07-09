@@ -1,7 +1,8 @@
-<ion-menu  side="end" menuId="main-menu" contentId="general" class="sliding-menu" color="ion-color-light-contrast" swipeGesture="false">
+<ion-menu side="end" menuId="main-menu" contentId="general" class="sliding-menu" color="ion-color-light-contrast"
+  swipeGesture="false">
   <ion-header no-lines>
-    <ion-title>Beltrán A.</ion-title>
-    <p>beltranalvarez@corteingles.com</p>
+    <ion-title>{{user?.name}}</ion-title>
+    <p>{{user?.email}}</p>
   </ion-header>
 
   <ion-content>
@@ -16,7 +17,7 @@
         Buzón
       </ion-item>
 
-      <ion-item class="menu-content" lines="none" class="ion-no-border">
+      <ion-item class="menu-content" lines="none" class="ion-no-border" (click)="logout()" [disabled]="loading">
         <ion-icon name="log-out-outline"></ion-icon>
         Cerrar sesión
       </ion-item>

@@ -19,6 +19,7 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { MailboxComponent } from './mailbox/mailbox.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -55,6 +56,7 @@ const COMPONENTS = [ExploreComponent];
     ComponentsModule,
     SharedDirectivesModule,
     ChartsModule,
+    ReactiveFormsModule,
   ]
 })
 export class PagesModule { }

@@ -9,19 +9,21 @@ import { MailboxComponent } from './pages/mailbox/mailbox.component';
 import { AlertsComponent } from './pages/alerts/alerts.component';
 import { AccessComponent } from './pages/access/access.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { GuestGuardService } from './services/guest-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'post', component: PostComponent },
-  { path: 'explora', component: ExploreComponent },
-  { path: 'accesos', component: AccessComponent },
-  { path: 'post-list', component: PostListComponent },
-  { path: 'room-list', component: RoomListComponent },
-  { path: 'mailbox', component: MailboxComponent },
-  { path: 'alerts', component: AlertsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: 'login', component: LoginComponent, canActivate: [GuestGuardService] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: 'post', component: PostComponent, canActivate: [AuthGuardService] },
+  { path: 'explora', component: ExploreComponent, canActivate: [AuthGuardService] },
+  { path: 'accesos', component: AccessComponent, canActivate: [AuthGuardService] },
+  { path: 'post-list', component: PostListComponent, canActivate: [AuthGuardService] },
+  { path: 'room-list', component: RoomListComponent, canActivate: [AuthGuardService] },
+  { path: 'mailbox', component: MailboxComponent, canActivate: [AuthGuardService] },
+  { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuardService] },
+  /* { path: '**', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuardService] }, */
 ];
 
 @NgModule({

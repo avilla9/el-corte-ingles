@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { StoryComponent } from '../../components/story/story.component';
 import { StoriesService } from '../../services/stories.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 
 @Component({
   selector: 'app-home',
@@ -77,18 +79,21 @@ export class HomeComponent implements OnInit {
   ]; */
 
   images: any;
-
   visited: any;
+  user;
 
   constructor(
     public menuCtrl: MenuController,
     public navCtrl: NavController,
     public modalController: ModalController,
     private stories: StoriesService,
-  ) { }
+    private jwtHelper: JwtHelperService,
+    private authService: AuthService,
+  ) {
+    this.getUserData();
+  }
 
-  ngOnInit() {
-
+  ngOnInit() { 
   }
 
   ionViewDidEnter() {
@@ -101,6 +106,16 @@ export class HomeComponent implements OnInit {
       });
 
     console.log(this.visited)
+  }
+
+  getUserData() {
+    this.authService.userData(this.jwtHelper.id())
+      .subscribe((res: any) => {
+        console.log(res);
+        this.user = res;
+      }, (err: any) => {
+        console.log(err);
+      });
   }
 
   toggleMenu() {
