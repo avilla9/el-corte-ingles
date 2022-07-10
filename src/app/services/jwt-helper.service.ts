@@ -43,7 +43,7 @@ export class JwtHelperService {
    * Get authenticated user's id
    */
   id() {
-    return +this.attr('sub');
+    return this.attr('sub');
   }
   /**
    * Get authenticated user's name

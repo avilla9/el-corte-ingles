@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { JwtHelperService } from '../../services/jwt-helper.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private jwtHelper: JwtHelperService,
   ) {
     this.form = fb.group({
       email: [
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         // Store the access token in the localstorage
         localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('user_id', this.jwtHelper.id().toString());
         this.loading = false;
         // Navigate to home page
         this.router.navigate(['/']);

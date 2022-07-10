@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ChartType } from 'chart.js';
+import { CampaignService } from 'src/app/services/explore/campaign.service';
 
 @Component({
   selector: 'app-adoption',
@@ -8,82 +9,6 @@ import { ChartType } from 'chart.js';
   styleUrls: ['./adoption.component.scss'],
 })
 export class AdoptionComponent implements OnInit {
-  statistics: any = [
-    {
-      title: 'Pólizas',
-      parameter: '75%',
-      doughnutChartLabels: [
-        'Ventas',
-        'Restan',
-      ],
-      doughnutChartData: [9, 3],
-      doughnutChartOptions: {
-        borderWidth: 1,
-        maintainAspectRatio: true,
-        cutoutPercentage: 70,
-        aspectRatio: 1,
-      },
-      doughnutChartType: 'doughnut',
-      responsive: true,
-      doughnutChartLegend: false,
-      colors: [
-        {
-          backgroundColor: [
-            'rgb(0, 0, 0)',
-            '#bababa',
-          ]
-        }
-      ],
-    },
-    {
-      title: 'Primas',
-      parameter: '1.567 €',
-      doughnutChartLabels: [
-        'Primas',
-      ],
-      doughnutChartData: [100],
-      doughnutChartOptions: {
-        borderWidth: 1,
-        maintainAspectRatio: true,
-        cutoutPercentage: 70,
-        aspectRatio: 1,
-      },
-      doughnutChartType: 'doughnut',
-      responsive: true,
-      doughnutChartLegend: false,
-      colors: [
-        {
-          backgroundColor: [
-            'rgb(0, 0, 0)',
-          ]
-        }
-      ],
-    },
-    {
-      title: 'Incentivo',
-      parameter: '0 €',
-      doughnutChartLabels: [
-        'Incentivo',
-      ],
-      doughnutChartData: [100],
-      doughnutChartOptions: {
-        borderWidth: 1,
-        maintainAspectRatio: true,
-        cutoutPercentage: 70,
-        aspectRatio: 1,
-      },
-      doughnutChartType: 'doughnut',
-      responsive: true,
-      doughnutChartLegend: false,
-      colors: [
-        {
-          backgroundColor: [
-            'rgb(0, 0, 0)',
-          ]
-        }
-      ],
-    },
-  ];
 
   data: any = [
     {
@@ -197,15 +122,132 @@ export class AdoptionComponent implements OnInit {
     }
   ];
 
+  statistics: any;
+  campaignsData: any;
+  currentCampaign: any;
+  pageStatus: any = false;
+  statusMessage = "Cargando...";
+
   constructor(
     public navCtrl: NavController,
+    private campaignService: CampaignService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.campaigns();
+  }
 
   clickBox(list) {
     localStorage.removeItem('post-list');
     localStorage.setItem('post-list', JSON.stringify(list));
     this.navCtrl.navigateForward("/post-list");
+  }
+
+  campaigns() {
+    this.campaignService.campaignList('Adopción')
+      .subscribe((res: any) => {
+        this.campaignsData = res;
+        this.pageStatus = true;
+      }, (err: any) => {
+        this.statusMessage = 'Error al cargar la información';
+      });
+  }
+
+  handleChange(ev) {
+    this.currentCampaign = this.campaignsData[ev.target.value];
+    this.setStatistics(this.currentCampaign);
+  }
+
+  setStatistics(data) {
+    let polize = 0;
+    let bonus = 0;
+    let incentive = 0;
+
+    if (data.policy_objective > 0) {
+      polize = parseFloat((data.policy_raised * 100 / data.policy_objective).toPrecision(2));
+    }
+    if (typeof (data.bonus) !== 'undefined') {
+      bonus = data.bonus;
+    }
+    if (typeof (data.incentive) !== 'undefined') {
+      incentive = data.incentive;
+    }
+
+    this.statistics = [
+      {
+        title: 'Pólizas',
+        parameter: polize + '%',
+        doughnutChartLabels: [
+          'Ventas',
+          'Restan',
+        ],
+        doughnutChartData: [polize, 100 - polize],
+        doughnutChartOptions: {
+          borderWidth: 1,
+          maintainAspectRatio: true,
+          cutoutPercentage: 70,
+          aspectRatio: 1,
+        },
+        doughnutChartType: 'doughnut',
+        responsive: true,
+        doughnutChartLegend: false,
+        colors: [
+          {
+            backgroundColor: [
+              'rgb(0, 0, 0)',
+              '#bababa',
+            ]
+          }
+        ],
+      },
+      {
+        title: 'Primas',
+        parameter: bonus + ' €',
+        doughnutChartLabels: [
+          'Primas',
+        ],
+        doughnutChartData: [100],
+        doughnutChartOptions: {
+          borderWidth: 1,
+          maintainAspectRatio: true,
+          cutoutPercentage: 70,
+          aspectRatio: 1,
+        },
+        doughnutChartType: 'doughnut',
+        responsive: true,
+        doughnutChartLegend: false,
+        colors: [
+          {
+            backgroundColor: [
+              'rgb(0, 0, 0)',
+            ]
+          }
+        ],
+      },
+      {
+        title: 'Incentivo',
+        parameter: incentive + ' €',
+        doughnutChartLabels: [
+          'Incentivo',
+        ],
+        doughnutChartData: [100],
+        doughnutChartOptions: {
+          borderWidth: 1,
+          maintainAspectRatio: true,
+          cutoutPercentage: 70,
+          aspectRatio: 1,
+        },
+        doughnutChartType: 'doughnut',
+        responsive: true,
+        doughnutChartLegend: false,
+        colors: [
+          {
+            backgroundColor: [
+              'rgb(0, 0, 0)',
+            ]
+          }
+        ],
+      },
+    ];
   }
 }
