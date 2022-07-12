@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.thevaluescorner.www;
 
 import com.getcapacitor.BridgeActivity;
 

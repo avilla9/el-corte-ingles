@@ -15,7 +15,7 @@ export class CampaignService {
 
   campaignList(page) {
     return this.http.post(
-      this.apiUrl + 'campaign/list',
+      this.apiUrl + '/campaign/list',
       {
         user_id: parseInt(localStorage.getItem('user_id')),
         page_name: page,
