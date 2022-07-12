@@ -1,11 +1,11 @@
-<div class="content">
-  <ion-select value="Campañas" multiple="false" placeholder="Incentivos Abril" class="selector">
-    <ion-select-option value="incentivos-abril">
-      Incentivos Abril
+<div class="content" [hidden]="!pageStatus">
+  <ion-select multiple="false" class="selector" (ionChange)="handleChange($event)" placeholder="Seleccionar campaña">
+    <ion-select-option *ngFor="let campaign of campaignsData; let i = index" [value]="i">
+      {{campaign.campaign_title}}
     </ion-select-option>
   </ion-select>
 
-  <div class="boxes">
+  <div class="boxes" [hidden]="!currentCampaign">
     <div class="box" *ngFor="let box of data" (click)="clickBox(box)">
       <img src="../../../assets/images/{{box.img}}">
       <div class="float-content">
@@ -13,9 +13,13 @@
       </div>
     </div>
   </div>
+
+  <div class="select-a-campaign" [hidden]="currentCampaign">
+    Seleccione una campaña
+  </div>
 </div>
 
-<div class="statistics">
+<div class="statistics" [hidden]="!currentCampaign">
   <div class="title">Lo que he conseguido</div>
   <div class="scrolling-wrapper">
     <div class="container" *ngFor="let kpi of statistics">
@@ -29,4 +33,8 @@
       </canvas>
     </div>
   </div>
+</div>
+
+<div class="content" [hidden]="pageStatus">
+  {{statusMessage}}
 </div>
