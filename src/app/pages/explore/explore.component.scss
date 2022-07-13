@@ -7,15 +7,20 @@
     align-items: center;
     justify-content: space-between;
     padding: 2vw 8vw;
-  
+
     .section-name {
       font-size: 24px;
     }
-  
+
     .open-menu {
       color: var(--ion-color-medium);
       width: 10vw;
       height: 10vw;
+
+      @media (min-width: 768px) {
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 
@@ -40,15 +45,30 @@
       align-items: center;
       justify-content: center;
 
+      @media (min-width: 768px) {
+        width: 170px;
+        height: 170px;
+        margin: 0 2vw 0 0;
+      }
+
       p {
         margin: 2vw 0 0 0;
         font-size: 3vw;
         color: var(--ion-color-light-contrast);
+
+        @media (min-width: 768px) {
+          font-size: 20px;
+        }
       }
 
       .post-thumb {
         width: 10vw;
         height: 10vw;
+
+        @media (min-width: 768px) {
+          width: 60px;
+          height: 60px;
+        }
       }
     }
 

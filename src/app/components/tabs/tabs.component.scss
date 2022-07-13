@@ -4,5 +4,16 @@ ion-tab-bar {
   ion-icon {
     width: 8vw;
     height: 8vw;
+
+    @media (min-width: 768px) {
+      width: 55px;
+      height: 55px;
+    }
+  }
+
+  ion-label {
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
   }
 }

@@ -13,11 +13,20 @@
     color: var(--ion-color-medium);
     width: 10vw;
     height: 10vw;
+
+    @media (min-width: 768px) {
+      width: 60px;
+      height: 60px;
+    }
   }
 }
 
 .container {
   padding: 4vw 6vw;
+
+  @media (min-width: 768px) {
+    padding: 4vw 20vw;
+  }
 
   .group {
     margin-bottom: 6vw;
@@ -25,6 +34,10 @@
     .title {
       font-size: 6vw;
       font-weight: bold;
+
+      @media (min-width: 768px) {
+        font-size: 35px;
+      }
     }
 
     .notification {
@@ -39,6 +52,12 @@
         width: 10vw;
         height: 10vw;
         margin-right: 4vw;
+
+        @media (min-width: 768px) {
+          width: 60px;
+          height: 60px;
+          margin-right: 20px;
+        }
       }
 
       .information {
@@ -46,10 +65,18 @@
           font-size: 5vw;
           font-weight: bold;
           margin-bottom: 2vw;
+
+          @media (min-width: 768px) {
+            font-size: 25px;
+          }
         }
-  
+
         .description {
           font-size: 4vw;
+
+          @media (min-width: 768px) {
+            font-size: 20px;
+          }
         }
       }
     }

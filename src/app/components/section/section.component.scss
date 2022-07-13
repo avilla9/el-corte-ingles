@@ -24,11 +24,11 @@
       border-radius: 2vw;
       position: relative;
 
-      /* display: inline-block;
-      min-height: 70vw;
-      max-height: 70vw;
-      height: 70vw; */
-
+      @media (min-width: 768px) {
+        width: 300px;
+        padding: 0;
+        margin: 0 2vw 0 0;
+      }
 
       .post-thumb {
         width: 100%;
@@ -44,6 +44,12 @@
           width: 7vw;
           height: 7vw;
           margin-right: 4vw;
+
+          @media (min-width: 768px) {
+            width: 40px;
+            height: 40px;
+            margin-right: 2vw;
+          }
         }
       }
 
