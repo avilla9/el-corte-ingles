@@ -13,11 +13,21 @@
     color: var(--ion-color-medium);
     width: 10vw;
     height: 10vw;
+
+    @media (min-width: 768px) {
+      width: 60px;
+      height: 60px;
+    }
   }
 }
 
 .container {
   padding: 4vw;
+
+  @media (min-width: 768px) {
+    padding: 4vw 16vw;
+  }
+
   .post-list {
     display: flex;
     flex-direction: row;
@@ -33,7 +43,7 @@
       border-radius: 2vw;
       margin-right: 2vw;
     }
-    
+
     .content {
       width: 60vw;
 
@@ -41,10 +51,19 @@
         font-weight: bold;
         font-size: 4vw;
         margin-bottom: 1vw;
+
+        @media (min-width: 768px) {
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
       }
 
       .description {
         font-size: 3vw;
+
+        @media (min-width: 768px) {
+          font-size: 20px;
+        }
       }
     }
   }

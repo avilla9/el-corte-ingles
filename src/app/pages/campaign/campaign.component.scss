@@ -18,6 +18,13 @@
     .box {
       margin-bottom: 4vw;
       position: relative;
+      height: 175px;
+      width: 340px;
+
+      @media (min-width: 768px) {
+        margin-bottom: 50px;
+        width: 400px;
+      }
 
       img {
         width: 100%;
@@ -37,11 +44,16 @@
         align-items: center;
         justify-content: center;
         z-index: 2;
+        text-align: center;
 
         .title {
           font-size: 6vw;
           font-weight: bold;
           color: var(--ion-color-light);
+
+          @media (min-width: 768px) {
+            font-size: 35px;
+          }
         }
       }
     }
@@ -56,6 +68,10 @@
     text-align: center;
     margin-bottom: 4vw;
     font-weight: bold;
+
+    @media (min-width: 768px) {
+      font-size: 35px;
+    }
   }
 
   .scrolling-wrapper {
@@ -69,6 +85,10 @@
       flex: 0 0 auto;
       width: 55vw;
       margin: 0 4vw;
+
+      @media (min-width: 768px) {
+        width: 300px;
+      }
 
       .information {
         position: absolute;
@@ -85,12 +105,20 @@
           font-size: 6vw;
           margin-bottom: 2vw;
           font-weight: bold;
+
+          @media (min-width: 768px) {
+            font-size: 35px;
+          }
         }
 
         .title {
           font-size: 4vw;
           margin: 0;
           font-weight: normal;
+
+          @media (min-width: 768px) {
+            font-size: 25px;
+          }
         }
       }
     }
