@@ -4,12 +4,14 @@ import { StoryComponent } from '../../components/story/story.component';
 import { StoriesService } from '../../services/stories.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
+import { ArticleService } from '../../services/explore/article.service';
 import {
   ActionPerformed,
   PushNotificationSchema,
   PushNotifications,
   Token,
 } from '@capacitor/push-notifications';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-home',
@@ -86,7 +88,8 @@ export class HomeComponent implements OnInit {
 
   images: any;
   visited: any;
-  user;
+  user: any;
+  posts: any;
 
   constructor(
     public menuCtrl: MenuController,
@@ -95,11 +98,13 @@ export class HomeComponent implements OnInit {
     private stories: StoriesService,
     private jwtHelper: JwtHelperService,
     private authService: AuthService,
-  ) {
-    this.getUserData();
-  }
+    private articleService: ArticleService,
+    private iab: InAppBrowser,
+  ) { }
 
   ngOnInit() {
+    this.getUserData();
+    this.getArticles();
     /* console.log('Initializing HomePage');
     // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
@@ -146,7 +151,7 @@ export class HomeComponent implements OnInit {
     this.stories
       .getStories()
       .subscribe((response) => {
-        console.log('get', response);
+        /* console.log('get', response); */
         this.images = response;
         this.visited = Array(this.images.length);
       });
@@ -159,6 +164,16 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.user = res;
+      }, (err: any) => {
+        console.log(err);
+      });
+  }
+
+  getArticles() {
+    this.articleService.articleList('Home')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.posts = res;
       }, (err: any) => {
         console.log(err);
       });
@@ -191,5 +206,22 @@ export class HomeComponent implements OnInit {
         modal.present().then();
       });
     this.visited[position] = true;
+  }
+
+  open(article) {
+    if (article.post_type === 'post') {
+      this.interalPost(article);
+    } else if (article.post_type === 'external') {
+      this.externalPost(article.external_link);
+    }
+  }
+
+  externalPost(url) {
+    this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
+  }
+
+  interalPost(data) {
+    localStorage.setItem('post', JSON.stringify(data));
+    this.navCtrl.navigateForward("/post");
   }
 }

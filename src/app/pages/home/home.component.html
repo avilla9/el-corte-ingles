@@ -28,7 +28,25 @@
     </div>
   </div>
 
-  <app-section></app-section>
+  <!-- <app-section></app-section> -->
+  <div class="section-container" *ngFor="let post of posts">
+    <div class="section-name">{{post.section}}</div>
+    <div class="scrolling-wrapper">
+      <div class="card" *ngFor="let article of post.articles" (click)="open(article)">
+        <img class="post-thumb" src="{{article.media_path}}">
+        <div class="content">
+          <p class="title">{{article.title}}</p>
+          <p class="body">
+            {{article.short_description}}
+          </p>
+        </div>
+        <div class="icons">
+          <ion-icon class="icon" name="heart-outline"></ion-icon>
+          <ion-icon class="icon" name="share-social-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <ion-footer class="ion-no-border">
     <span>2022 Created by</span>
