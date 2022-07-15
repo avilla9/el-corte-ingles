@@ -22,4 +22,15 @@ export class CampaignService {
       }
     );
   }
+
+  campaignData(page, campaign) {
+    return this.http.post(
+      this.apiUrl + '/campaign/data',
+      {
+        user_id: parseInt(localStorage.getItem('user_id')),
+        campaign_id: campaign,
+        page: page,
+      }
+    );
+  }
 }
