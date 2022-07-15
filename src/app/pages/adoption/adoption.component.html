@@ -7,7 +7,7 @@
 
   <div class="boxes" [hidden]="!campaignSelected">
     <div class="box" *ngFor="let data of campaignSelected; let i = index" [hidden]="i === 3" (click)="clickBox(data)">
-      <img src="../../../assets/images/1.jpg">
+      <img src="../../../assets/images/adoption/{{i+1}}.jpg">
       <div class="float-content">
         <div class="title">{{data.section}}</div>
       </div>
