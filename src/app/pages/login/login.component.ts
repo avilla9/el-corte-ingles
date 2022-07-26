@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private jwtHelper: JwtHelperService,
+
+    private renderer: Renderer2,
+    private elem: ElementRef
   ) {
     this.form = fb.group({
       email: [
@@ -35,7 +38,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   /**
    * Login the user based on the form values
@@ -45,13 +49,19 @@ export class LoginComponent implements OnInit {
     this.errors = false;
     this.authService.login(this.controls.email.value, this.controls.password.value)
       .subscribe((res: any) => {
+
         console.log(res);
         // Store the access token in the localstorage
         localStorage.setItem('access_token', res.access_token);
         localStorage.setItem('user_id', this.jwtHelper.id().toString());
         this.loading = false;
+
+
+        const parent = this.renderer.selectRootElement(this.elem.nativeElement.parentNode);
+        this.renderer.setStyle(parent, 'display', 'block')
+
         // Navigate to home page
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }, (err: any) => {
         console.log(err);
         // This error can be internal or invalid credentials

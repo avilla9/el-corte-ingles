@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "SECI Point",
+	"appId": "com.thevaluescorner.www",
+	"appName": "The Net",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }

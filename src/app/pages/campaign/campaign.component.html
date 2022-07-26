@@ -1,25 +1,25 @@
 <div class="content" [hidden]="!pageStatus">
   <ion-select multiple="false" class="selector" (ionChange)="handleChange($event)" placeholder="Seleccionar campaña">
-    <ion-select-option *ngFor="let campaign of campaignsData; let i = index" [value]="i">
+    <ion-select-option *ngFor="let campaign of campaignsData; let i = index" [value]="campaign.id">
       {{campaign.campaign_title}}
     </ion-select-option>
   </ion-select>
 
-  <div class="boxes" [hidden]="!currentCampaign">
-    <div class="box" *ngFor="let box of data" (click)="clickBox(box)">
-      <img src="../../../assets/images/{{box.img}}">
+  <div class="boxes" [hidden]="!campaignSelected">
+    <div class="box" *ngFor="let data of campaignSelected; let i = index" [hidden]="i === 3" (click)="clickBox(data)">
+      <img *ngIf="i != 3" src="../../../assets/images/campaign/{{i+1}}.jpg">
       <div class="float-content">
-        <div class="title">{{box.parentTitle}}</div>
+        <div class="title">{{data.section}}</div>
       </div>
     </div>
   </div>
 
-  <div class="select-a-campaign" [hidden]="currentCampaign">
+  <div class="select-a-campaign" [hidden]="campaignSelected">
     Seleccione una campaña
   </div>
 </div>
 
-<div class="statistics" [hidden]="!currentCampaign">
+<div class="statistics" [hidden]="!campaignSelected">
   <div class="title">Lo que he conseguido</div>
   <div class="scrolling-wrapper">
     <div class="container" *ngFor="let kpi of statistics">

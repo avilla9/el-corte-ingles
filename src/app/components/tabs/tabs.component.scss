@@ -1,3 +1,15 @@
+.unShow {
+  ion-tab-bar {
+    display: none;
+  }
+}
+
+.show {
+  ion-tab-bar {
+    display: auto;
+  }
+}
+
 ion-tab-bar {
   height: 15vw;
 
