@@ -12,6 +12,7 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { ReactionService } from '../../services/reaction.service';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
     private jwtHelper: JwtHelperService,
     private authService: AuthService,
     private articleService: ArticleService,
+    private reactions: ReactionService,
     private iab: InAppBrowser,
 
     private renderer: Renderer2,
@@ -104,9 +106,7 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.user = res;
-        this.newItemEvent.emit(true);
       }, (err: any) => {
-        this.newItemEvent.emit(false);
         console.log(err);
       });
   }
@@ -165,5 +165,23 @@ export class HomeComponent implements OnInit {
   interalPost(data) {
     localStorage.setItem('post', JSON.stringify(data));
     this.navCtrl.navigateForward("/post");
+  }
+
+  like(post, event) {
+    console.log('event', event);
+    var target = event.target || event.srcElement || event.currentTarget;
+    this.reactions
+      .doLike(post)
+      .subscribe((response) => {
+        if (response > 0) {
+          target.setAttribute('class', 'icon md hydrated liked');
+          target.setAttribute('name', 'heart');
+        } else {
+          target.setAttribute('class', 'icon md hydrated');
+          target.setAttribute('name', 'heart-outline');
+        }
+      });
+
+    console.log(this.visited)
   }
 }

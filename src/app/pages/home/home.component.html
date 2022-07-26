@@ -29,19 +29,19 @@
   </div>
 
   <!-- <app-section></app-section> -->
-  <div class="section-container" *ngFor="let post of posts">
+  <div class="section-container" *ngFor="let post of posts; let i = index">
     <div class="section-name">{{post.section}}</div>
     <div class="scrolling-wrapper">
-      <div class="card" *ngFor="let article of post.articles" (click)="open(article)">
+      <div class="card" *ngFor="let article of post.articles">
         <img class="post-thumb" src="{{article.media_path}}">
-        <div class="content">
+        <div class="content" (click)="open(article)">
           <p class="title">{{article.title}}</p>
           <p class="body">
             {{article.short_description}}
           </p>
         </div>
         <div class="icons">
-          <ion-icon class="icon" name="heart-outline"></ion-icon>
+          <ion-icon [className]="article.reactions?.length ? 'icon liked' : 'icon'" [name]="article.reactions?.length ? 'heart' : 'heart-outline'" (click)="like(article, $event)"></ion-icon>
           <ion-icon class="icon" name="share-social-outline"></ion-icon>
         </div>
       </div>
