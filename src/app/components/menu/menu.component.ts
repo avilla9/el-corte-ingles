@@ -13,7 +13,6 @@ export class MenuComponent implements OnInit {
 
   accessToken: any;
   accessTokenDetails: any;
-  loading: boolean;
   user;
 
   constructor(
@@ -43,11 +42,9 @@ export class MenuComponent implements OnInit {
    * Logout the user and revoke his token
    */
   logout(): void {
-    this.loading = true;
     this.authService.logout(this.user.id)
       .subscribe((res: any) => {
         console.log(res);
-        this.loading = false;
         localStorage.removeItem('access_token');
         this.router.navigate(['/login']);
       });

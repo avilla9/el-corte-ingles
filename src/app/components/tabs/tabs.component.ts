@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -7,8 +7,19 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./tabs.component.scss'],
 })
 export class TabsComponent implements OnInit {
+  show: boolean;
 
   constructor(public navCtrl: NavController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  onTabsWillChange(event) {
+    console.log('change', event.tab);
+    if (event.tab === 'login') {
+      console.log('islogin');
+      this.show = false;
+    } else {
+      this.show = true;
+    }
+  }
 }

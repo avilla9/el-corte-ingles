@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { StoryComponent } from '../../components/story/story.component';
 import { StoriesService } from '../../services/stories.service';
@@ -20,76 +20,12 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 })
 export class HomeComponent implements OnInit {
 
-  /* images: any = [
-    {
-      src: '../../../assets/images/1.jpg',
-      date: '',
-      link: {
-        name: 'PDF',
-        internal: '',
-        external: 'https://drive.google.com/file/d/1oTWf5-6m_P9DvWQOlInJHZ53cT__sPaB/view?usp=sharing',
-      }
-    },
-    {
-      src: '../../../assets/images/2.jpg',
-      date: '',
-      link: {
-        name: 'TVC',
-        internal: '',
-        external: 'https://thevaluescorner.com/',
-      }
-    },
-    {
-      src: '../../../assets/images/3.jpg',
-      date: '',
-      link: {
-        name: '',
-        internal: '',
-        external: '',
-      }
-    },
-    {
-      src: '../../../assets/images/4.jpg',
-      date: '',
-      link: {
-        name: 'Abrir documento',
-        internal: '',
-        external: 'https://drive.google.com/file/d/1ZGg1qskLWm3gtVS-LeEfv_6XEHeHd_vy/view?usp=sharing',
-      }
-    },
-    {
-      src: '../../../assets/images/5.jpg',
-      date: '',
-      link: {
-        name: '',
-        internal: '',
-        external: '',
-      }
-    },
-    {
-      src: '../../../assets/images/6.jpg',
-      date: '',
-      link: {
-        name: '',
-        internal: '',
-        external: '',
-      }
-    },
-    {
-      src: '../../../assets/images/7.jpg',
-      date: '',
-      link: {
-        name: '',
-        internal: '',
-        external: '',
-      }
-    },
-  ]; */
-
   images: any;
   visited: any;
   user: any;
   posts: any;
+
+  @Output() newItemEvent = new EventEmitter<boolean>();
 
   constructor(
     public menuCtrl: MenuController,
@@ -100,11 +36,15 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private articleService: ArticleService,
     private iab: InAppBrowser,
+
+    private renderer: Renderer2,
+    private elem: ElementRef
   ) { }
 
   ngOnInit() {
     this.getUserData();
     this.getArticles();
+
     /* console.log('Initializing HomePage');
     // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
@@ -164,7 +104,9 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.user = res;
+        this.newItemEvent.emit(true);
       }, (err: any) => {
+        this.newItemEvent.emit(false);
         console.log(err);
       });
   }
