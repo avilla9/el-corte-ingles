@@ -151,6 +151,9 @@ export class HomeComponent implements OnInit {
   }
 
   open(article) {
+    // The user click to see the article
+    this.view(article);
+
     if (article.post_type === 'post') {
       this.interalPost(article);
     } else if (article.post_type === 'external') {
@@ -183,5 +186,13 @@ export class HomeComponent implements OnInit {
       });
 
     console.log(this.visited)
+  }
+
+  view(post) {
+    this.reactions
+      .doView(post)
+      .subscribe((response) => {
+        console.log('view', response);
+      });
   }
 }

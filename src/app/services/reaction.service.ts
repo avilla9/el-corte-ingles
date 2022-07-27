@@ -18,4 +18,11 @@ export class ReactionService {
       user_id: parseInt(localStorage.getItem('user_id'))
     });
   }
+
+  doView(article) {
+    return this.http.post(this.apiUrl + '/view', {
+      post_id: article.id,
+      user_id: parseInt(localStorage.getItem('user_id'))
+    });
+  }
 }
