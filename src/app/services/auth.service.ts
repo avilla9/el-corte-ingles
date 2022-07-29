@@ -33,7 +33,6 @@ export class AuthService {
    * @param p The password string
    */
   login(e: string, p: string) {
-    console.log('login with', e, p);
     return this.http.post(this.authUrl, {
       grant_type: 'password',
       client_id: '2',
