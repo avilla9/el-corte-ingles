@@ -13,8 +13,8 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { GuestGuardService } from './services/guest-guard.service';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent, canActivate: [GuestGuardService] },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'post', component: PostComponent, canActivate: [AuthGuardService] },
   { path: 'explora', component: ExploreComponent, canActivate: [AuthGuardService] },

@@ -46,6 +46,7 @@ export class MenuComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         localStorage.removeItem('access_token');
+        localStorage.removeItem('user_id');
         this.router.navigate(['/login']);
       });
   }
