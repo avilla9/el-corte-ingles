@@ -22,14 +22,7 @@ export class OpenComponent implements OnInit {
   }
 
   toggleMenu() {
-    console.log('activeMenu', this.activeMenu)
-    if (this.activeMenu) {
-      this.menuCtrl.close();
-    } else {
-      this.menuCtrl.open();
-    }
     this.activeMenu = !this.activeMenu;
-    /* let open = this.menuCtrl.toggle();
-    console.log('open', open) */
+    let open = this.menuCtrl.toggle();
   }
 }

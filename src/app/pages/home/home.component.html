@@ -33,7 +33,7 @@
     <div class="section-name">{{post.section}}</div>
     <div class="scrolling-wrapper">
       <div class="card" *ngFor="let article of post.articles">
-        <img class="post-thumb" src="{{article.media_path}}">
+        <img class="post-thumb" src="{{article.media_path}}" (click)="open(article)">
         <div class="content" (click)="open(article)">
           <p class="title">{{article.title}}</p>
           <p class="body">
