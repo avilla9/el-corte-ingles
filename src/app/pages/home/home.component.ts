@@ -5,6 +5,8 @@ import { StoriesService } from '../../services/stories.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 import { ArticleService } from '../../services/explore/article.service';
+import { Share } from '@capacitor/share';
+
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -188,6 +190,15 @@ export class HomeComponent implements OnInit {
       });
 
     console.log(this.visited)
+  }
+
+  async shareApp(post) {
+    await Share.share({
+      title: post.title,
+      text: post.short_description,
+      url: 'https://app-eci.web.app/',
+      dialogTitle: 'Share with buddies',
+    });
   }
 
   view(post) {
