@@ -14,10 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 /* import { ChartsModule } from 'ng2-charts'; */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SafeHtmlPipe,
   ],
   exports: [],
   entryComponents: [],

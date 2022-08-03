@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 
@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
     private jwtHelper: JwtHelperService,
     private authService: AuthService,
     private router: Router,
+    public menuCtrl: MenuController
   ) {
     this.accessToken = localStorage.getItem('access_token');
     this.accessTokenDetails = jwtHelper.id();
@@ -34,6 +35,10 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() { }
 
+  toggleMenu() {
+    this.menuCtrl.toggle();
+  }
+
   redirect(page) {
     this.navCtrl.navigateForward(page);
   }
@@ -46,6 +51,7 @@ export class MenuComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         localStorage.removeItem('access_token');
+        localStorage.removeItem('user_id');
         this.router.navigate(['/login']);
       });
   }

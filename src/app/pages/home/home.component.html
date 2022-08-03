@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <div class="header">
     <img class="logo" src="../../../assets/icon/eci-white.svg" />
-    <ion-icon class="open-menu" name="person-circle-outline" (click)="toggleMenu()"></ion-icon>
+    <app-open></app-open>
   </div>
 </ion-header>
 
@@ -21,7 +21,7 @@
     <div class="scroll-horizontal">
       <div class="scroll-item" *ngFor="let img of images; let position = index">
         <ion-avatar (click)="openModal(images, position)" class="avatar-md"
-          [ngClass]="{'has-update has-status': visited[position] !== true}">
+          [ngClass]="{'has-update has-status': !img.view}">
           <img src="{{img.media_path}}">
         </ion-avatar>
       </div>
@@ -29,20 +29,20 @@
   </div>
 
   <!-- <app-section></app-section> -->
-  <div class="section-container" *ngFor="let post of posts">
+  <div class="section-container" *ngFor="let post of posts; let i = index">
     <div class="section-name">{{post.section}}</div>
     <div class="scrolling-wrapper">
-      <div class="card" *ngFor="let article of post.articles" (click)="open(article)">
-        <img class="post-thumb" src="{{article.media_path}}">
-        <div class="content">
+      <div class="card" *ngFor="let article of post.articles">
+        <img class="post-thumb" src="{{article.media_path}}" (click)="open(article)">
+        <div class="content" (click)="open(article)">
           <p class="title">{{article.title}}</p>
           <p class="body">
             {{article.short_description}}
           </p>
         </div>
         <div class="icons">
-          <ion-icon class="icon" name="heart-outline"></ion-icon>
-          <ion-icon class="icon" name="share-social-outline"></ion-icon>
+          <ion-icon [className]="article.reactions?.length ? 'icon liked' : 'icon'" [name]="article.reactions?.length ? 'heart' : 'heart-outline'" (click)="like(article, $event)"></ion-icon>
+          <ion-icon class="icon" name="share-social-outline" (click)="shareApp(post)"></ion-icon>
         </div>
       </div>
     </div>

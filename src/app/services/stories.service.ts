@@ -13,6 +13,11 @@ export class StoriesService {
   ) { }
 
   getStories() {
-    return this.http.get(this.apiUrl + '/stories');
+    return this.http.post(
+      this.apiUrl + '/posts/stories',
+      {
+        user_id: parseInt(localStorage.getItem('user_id'))
+      }
+    );
   }
 }

@@ -32,7 +32,7 @@
         <div class="scrolling-wrapper" *ngIf="section.custom_class == 'challenge-you'">
           <div class="card" *ngFor="let article of section.articles">
             <div class="content">
-              <p class="title">{{article.title}}</p>
+              <p class="title" (click)="clickPost(article)">{{article.title}}</p>
               <p class="body" [ngClass]="{'linked': article.link_short_description?.length}"
                 (click)="article.link_short_description?.length && externalPost(article.link_short_description)">
                 {{article.short_description}}</p>

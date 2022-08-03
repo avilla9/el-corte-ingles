@@ -5,6 +5,8 @@ import { StoriesService } from '../../services/stories.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 import { ArticleService } from '../../services/explore/article.service';
+import { Share } from '@capacitor/share';
+
 import {
   ActionPerformed,
   PushNotificationSchema,
@@ -12,6 +14,7 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { ReactionService } from '../../services/reaction.service';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +38,7 @@ export class HomeComponent implements OnInit {
     private jwtHelper: JwtHelperService,
     private authService: AuthService,
     private articleService: ArticleService,
+    private reactions: ReactionService,
     private iab: InAppBrowser,
 
     private renderer: Renderer2,
@@ -88,14 +92,7 @@ export class HomeComponent implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.stories
-      .getStories()
-      .subscribe((response) => {
-        /* console.log('get', response); */
-        this.images = response;
-        this.visited = Array(this.images.length);
-      });
-
+    this.getStories();
     console.log(this.visited)
   }
 
@@ -104,10 +101,18 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.user = res;
-        this.newItemEvent.emit(true);
       }, (err: any) => {
-        this.newItemEvent.emit(false);
         console.log(err);
+      });
+  }
+
+  getStories() {
+    this.stories
+      .getStories()
+      .subscribe((response) => {
+        this.images = response;
+        console.log(this.images);
+        this.visited = Array(this.images.length);
       });
   }
 
@@ -130,27 +135,29 @@ export class HomeComponent implements OnInit {
     this.navCtrl.navigateForward('/explora');
   }
 
-  openModal(image, position) {
-    this.modalController
-      .create(
-        {
-          component: StoryComponent,
-          backdropDismiss: true,
-          swipeToClose: true,
-          cssClass: 'bottom-pop-up',
-          componentProps: {
-            img: image,
-            pos: position,
-            visited: this.visited,
-          }
-        })
-      .then(modal => {
-        modal.present().then();
-      });
-    this.visited[position] = true;
+  async openModal(image, position) {
+    const modal = await this.modalController.create({
+      component: StoryComponent,
+      backdropDismiss: true,
+      swipeToClose: true,
+      cssClass: 'bottom-pop-up',
+      componentProps: {
+        img: image,
+        pos: position,
+        visited: this.visited,
+      }
+    });
+    modal.onWillDismiss().then(data => {
+      console.log('dismissed', data);
+      this.getStories();
+    });
+    return await modal.present();
   }
 
   open(article) {
+    // The user click to see the article
+    this.view(article);
+
     if (article.post_type === 'post') {
       this.interalPost(article);
     } else if (article.post_type === 'external') {
@@ -165,5 +172,40 @@ export class HomeComponent implements OnInit {
   interalPost(data) {
     localStorage.setItem('post', JSON.stringify(data));
     this.navCtrl.navigateForward("/post");
+  }
+
+  like(post, event) {
+    console.log('event', event);
+    var target = event.target || event.srcElement || event.currentTarget;
+    this.reactions
+      .doLike(post)
+      .subscribe((response) => {
+        if (response > 0) {
+          target.setAttribute('class', 'icon md hydrated liked');
+          target.setAttribute('name', 'heart');
+        } else {
+          target.setAttribute('class', 'icon md hydrated');
+          target.setAttribute('name', 'heart-outline');
+        }
+      });
+
+    console.log(this.visited)
+  }
+
+  async shareApp(post) {
+    await Share.share({
+      title: post.title,
+      text: post.short_description,
+      url: 'https://app-eci.web.app/',
+      dialogTitle: 'Share with buddies',
+    });
+  }
+
+  view(post) {
+    this.reactions
+      .doView(post)
+      .subscribe((response) => {
+        console.log('view', response);
+      });
   }
 }
