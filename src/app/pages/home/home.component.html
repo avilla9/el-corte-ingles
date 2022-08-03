@@ -21,7 +21,7 @@
     <div class="scroll-horizontal">
       <div class="scroll-item" *ngFor="let img of images; let position = index">
         <ion-avatar (click)="openModal(images, position)" class="avatar-md"
-          [ngClass]="{'has-update has-status': visited[position] !== true}">
+          [ngClass]="{'has-update has-status': !img.view}">
           <img src="{{img.media_path}}">
         </ion-avatar>
       </div>

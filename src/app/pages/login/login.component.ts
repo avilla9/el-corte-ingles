@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
         this.renderer.setStyle(parent, 'display', 'block')
 
         // Navigate to home page
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }, (err: any) => {
         loading.dismiss();
         let errorType = err.error.error;

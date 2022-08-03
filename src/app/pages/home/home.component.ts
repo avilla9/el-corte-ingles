@@ -90,14 +90,7 @@ export class HomeComponent implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.stories
-      .getStories()
-      .subscribe((response) => {
-        /* console.log('get', response); */
-        this.images = response;
-        this.visited = Array(this.images.length);
-      });
-
+    this.getStories();
     console.log(this.visited)
   }
 
@@ -108,6 +101,16 @@ export class HomeComponent implements OnInit {
         this.user = res;
       }, (err: any) => {
         console.log(err);
+      });
+  }
+
+  getStories() {
+    this.stories
+      .getStories()
+      .subscribe((response) => {
+        this.images = response;
+        console.log(this.images);
+        this.visited = Array(this.images.length);
       });
   }
 
@@ -130,24 +133,23 @@ export class HomeComponent implements OnInit {
     this.navCtrl.navigateForward('/explora');
   }
 
-  openModal(image, position) {
-    this.modalController
-      .create(
-        {
-          component: StoryComponent,
-          backdropDismiss: true,
-          swipeToClose: true,
-          cssClass: 'bottom-pop-up',
-          componentProps: {
-            img: image,
-            pos: position,
-            visited: this.visited,
-          }
-        })
-      .then(modal => {
-        modal.present().then();
-      });
-    this.visited[position] = true;
+  async openModal(image, position) {
+    const modal = await this.modalController.create({
+      component: StoryComponent,
+      backdropDismiss: true,
+      swipeToClose: true,
+      cssClass: 'bottom-pop-up',
+      componentProps: {
+        img: image,
+        pos: position,
+        visited: this.visited,
+      }
+    });
+    modal.onWillDismiss().then(data => {
+      console.log('dismissed', data);
+      this.getStories();
+    });
+    return await modal.present();
   }
 
   open(article) {
