@@ -1,10 +1,14 @@
 <app-header></app-header>
 <app-menu></app-menu>
 <ion-content overflow-scroll="true">
-  <img class="post-thumb" src="{{post.media_path}}">
+  <img *ngIf="post.media_path?.length" class="post-thumb" src="{{post.media_path}}">
+  <img *ngIf="post.img?.length" class="post-thumb" src="{{post.img}}">
   <ion-card-header>
-    <ion-icon class="icon" name="heart-outline"></ion-icon>
-    <ion-icon class="icon" name="share-social-outline"></ion-icon>
+    <ion-icon [className]="post.reactions?.length ? 'icon liked' : 'icon'"
+      [name]="post.reactions?.length ? 'heart' : 'heart-outline'" (click)="like(post, $event)"></ion-icon>
+    <ion-icon class="icon" name="share-social-outline" (click)="shareApp(post)"></ion-icon>
+    <!-- <ion-icon class="icon" name="heart-outline"></ion-icon>
+    <ion-icon class="icon" name="share-social-outline"></ion-icon> -->
     <ion-card-subtitle>{{post.created_at.split(' ')[0]}}</ion-card-subtitle>
     <ion-card-title>{{post.title}}</ion-card-title>
   </ion-card-header>
