@@ -1,7 +1,7 @@
 <div class="section-container">
   <div class="top-content">
     <div class="section-name">{{currentTitle}}</div>
-    <ion-icon class="open-menu" name="person-circle-outline" (click)="toggleMenu()"></ion-icon>
+    <app-open></app-open>
   </div>
   <div class="scrolling-wrapper">
     <div class="card" *ngFor="let tab of tabs; let pos = index;" [ngClass]="{'active': pos === activeTab}"

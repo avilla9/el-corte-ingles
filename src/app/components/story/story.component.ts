@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { ReactionService } from 'src/app/services/reaction.service';
 
 @Component({
   selector: 'app-story',
@@ -19,11 +20,13 @@ export class StoryComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private reactions: ReactionService
   ) { }
 
   ngOnInit() {
     this.setProgress();
+    this.view(this.img[this.pos]);
   }
 
   setProgress() {
@@ -60,6 +63,15 @@ export class StoryComponent implements OnInit {
       this.modalController.dismiss();
       clearInterval(this.interval);
     }
+    this.view(this.img[this.pos]);
+  }
+
+  view(post) {
+    this.reactions
+      .viewStory(post)
+      .subscribe((response) => {
+        console.log('view', response);
+      });
   }
 
   close() {
@@ -82,4 +94,5 @@ export class StoryComponent implements OnInit {
 
   interalPost(article) {
   }
+  
 }

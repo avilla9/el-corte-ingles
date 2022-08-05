@@ -1,22 +1,26 @@
 <app-header></app-header>
 <app-menu></app-menu>
 <ion-content overflow-scroll="true">
-  <img class="post-thumb" src="../../../assets/images/{{post.img}}">
+  <img *ngIf="post.media_path?.length" class="post-thumb" src="{{post.media_path}}">
+  <img *ngIf="post.img?.length" class="post-thumb" src="{{post.img}}">
   <ion-card-header>
-    <ion-icon class="icon" name="heart-outline"></ion-icon>
-    <ion-icon class="icon" name="share-social-outline"></ion-icon>
-    <ion-card-subtitle>{{post.date}}</ion-card-subtitle>
+    <ion-icon [className]="post.reactions?.length ? 'icon liked' : 'icon'"
+      [name]="post.reactions?.length ? 'heart' : 'heart-outline'" (click)="like(post, $event)"></ion-icon>
+    <ion-icon class="icon" name="share-social-outline" (click)="shareApp(post)"></ion-icon>
+    <!-- <ion-icon class="icon" name="heart-outline"></ion-icon>
+    <ion-icon class="icon" name="share-social-outline"></ion-icon> -->
+    <ion-card-subtitle>{{post.created_at.split(' ')[0]}}</ion-card-subtitle>
     <ion-card-title>{{post.title}}</ion-card-title>
   </ion-card-header>
 
   <ion-card-content [innerHTML]="post.description"></ion-card-content>
 
-  <div class="cta" *ngIf="(post.cta?.length) && (post.cta_content?.length || post.cta_intern_link?.length)">
+  <div class="cta" *ngIf="(post.button_name?.length) && (post.cta_content?.length || post.button_link?.length)">
     <button *ngIf="post.cta_content?.length"
       (click)="post.cta_content?.length && externalPost(post.cta_content)">{{post.cta}}</button>
 
-    <button *ngIf="post.cta_intern_link?.length"
-      (click)="post.cta_intern_link?.length && interalRedirection(post.cta_intern_link)">{{post.cta}}</button>
+    <button *ngIf="post.button_link?.length"
+      (click)="post.button_link?.length && interalRedirection(post.button_link)">{{post.cta}}</button>
   </div>
 
 </ion-content>

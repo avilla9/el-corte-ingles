@@ -115,6 +115,7 @@ export class CampaignComponent implements OnInit {
   currentCampaign: any;
   pageStatus: any = false;
   statusMessage = "Cargando...";
+  campaignSelected: any;
 
   constructor(
     public navCtrl: NavController,
@@ -142,8 +143,20 @@ export class CampaignComponent implements OnInit {
   }
 
   handleChange(ev) {
-    this.currentCampaign = this.campaignsData[ev.target.value];
-    this.setStatistics(this.currentCampaign);
+    this.currentCampaign = ev.target.value;
+    this.loadSelectedCampaign(this.currentCampaign);
+  }
+
+  loadSelectedCampaign(campaign_id) {
+    this.campaignService.campaignData('Campaña', campaign_id)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.campaignSelected = res;
+        this.pageStatus = true;
+        this.setStatistics(res[3]);
+      }, (err: any) => {
+        this.statusMessage = 'Error al cargar la información';
+      });
   }
 
   setStatistics(data) {

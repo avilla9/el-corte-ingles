@@ -19,11 +19,12 @@ export class PostListComponent implements OnInit {
 
   ngOnInit() {
     this.list = JSON.parse(localStorage.getItem("post-list"));
+    console.log(this.list)
   }
 
   ionViewDidEnter() {
-    console.log(this.list);
     this.list = JSON.parse(localStorage.getItem("post-list"));
+    console.log(this.list)
   }
 
   toggleMenu() {
@@ -31,9 +32,9 @@ export class PostListComponent implements OnInit {
   }
 
   clickPost(article) {
-    if (article.link.length) {
-      this.externalPost(article.link)
-    } else {
+    if (article.post_type === 'external') {
+      this.externalPost(article.external_link)
+    } else if(article.post_type === 'post') {
       localStorage.removeItem('post');
       this.interalPost(article)
     }

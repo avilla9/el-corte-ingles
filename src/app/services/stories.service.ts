@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoriesService {
-
-  authUrl = environment.authUrl;
   apiUrl = environment.apiUrl;
 
   constructor(
@@ -15,6 +13,11 @@ export class StoriesService {
   ) { }
 
   getStories() {
-    return this.http.get(this.apiUrl + '/stories');
+    return this.http.post(
+      this.apiUrl + '/posts/stories',
+      {
+        user_id: parseInt(localStorage.getItem('user_id'))
+      }
+    );
   }
 }

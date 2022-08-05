@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { StoryComponent } from './story/story.component';
+import { OpenComponent } from './open/open.component';
 
 
 @NgModule({
@@ -15,12 +16,14 @@ import { StoryComponent } from './story/story.component';
     MenuComponent,
     TabsComponent,
     StoryComponent,
+    OpenComponent,
   ],
   exports: [
     SectionComponent,
     HeaderComponent,
     MenuComponent,
     TabsComponent,
+    OpenComponent,
   ],
   imports: [
     CommonModule,

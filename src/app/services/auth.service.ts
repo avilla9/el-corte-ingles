@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,6 +8,7 @@ export class AuthService {
   // Variables
   authUrl = environment.authUrl;
   apiUrl = environment.apiUrl;
+  client = environment.client_secret;
   options: any;
   /**
    * Constructor
@@ -32,11 +33,10 @@ export class AuthService {
    * @param p The password string
    */
   login(e: string, p: string) {
-    console.log('login with', e, p);
     return this.http.post(this.authUrl, {
       grant_type: 'password',
       client_id: '2',
-      client_secret: 'TSJ2fO86QS11X7LYjeKUa6bRknN1yj35vjyXTMq0',
+      client_secret: this.client,
       username: e,
       password: p,
       scope: ''

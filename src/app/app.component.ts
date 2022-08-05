@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
   public href: string = window.location.pathname;
 
-  constructor(private router: Router) {
-    console.log(this.href)
-  }
+  constructor(private router: Router) { }
 }

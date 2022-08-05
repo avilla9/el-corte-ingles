@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.abcdefghy.starter',
-  appName: 'SECI Point',
+  appId: 'com.thevaluescorner.www',
+  appName: 'The Net',
   webDir: 'www',
   bundledWebRuntime: false
 };
