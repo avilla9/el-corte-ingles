@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { MenuController, NavController } from '@ionic/angular';
+import { ArticleService } from '../../services/explore/article.service';
+import { ReactionService } from '../../services/reaction.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-access',
@@ -9,7 +12,7 @@ import { MenuController, NavController } from '@ionic/angular';
 })
 export class AccessComponent implements OnInit {
 
-  posts: any = [
+  /* posts: any = [
     {
       title: 'Salesforce',
       url: 'https://identity-services.elcorteingles.es/samlsso?spEntityID=https://eciseguros.my.salesforce.com',
@@ -50,15 +53,68 @@ export class AccessComponent implements OnInit {
       url: 'https://nexo.elcorteingles.es/jgestioncredenciales/gestioncredenciales/Inicio',
       img: 'access/gestion.jpg',
     },
-  ];
+  ]; */
+
+  posts: any;
+  visited: any;
 
   constructor(
     public navCtrl: NavController,
     private iab: InAppBrowser,
-    public menuCtrl: MenuController
+    public menuCtrl: MenuController,
+    private articleService: ArticleService,
+    private reactions: ReactionService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getArticles();
+  }
+
+  ionViewDidEnter() {
+    this.getArticles();
+  }
+
+  getArticles() {
+    this.articleService.articleList('Accesos')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.posts = res;
+      }, (err: any) => {
+        console.log(err);
+      });
+  }
+
+  clickPost(article) {
+    if (article.external_link?.length) {
+      this.externalPost(article.external_link)
+    } else {
+      localStorage.removeItem('post');
+      this.internalPost(article)
+    }
+  }
+
+  internalPost(article) {
+    localStorage.setItem('post', JSON.stringify(article));
+    this.navCtrl.navigateForward("/post");
+  }
+
+  like(post, event) {
+    console.log('event', event);
+    var target = event.target || event.srcElement || event.currentTarget;
+    this.reactions
+      .doLike(post)
+      .subscribe((response) => {
+        if (response > 0) {
+          target.setAttribute('class', 'icon md hydrated liked');
+          target.setAttribute('name', 'heart');
+        } else {
+          target.setAttribute('class', 'icon md hydrated');
+          target.setAttribute('name', 'heart-outline');
+        }
+      });
+
+    console.log(this.visited)
+  }
 
   toggleMenuAccess() {
     this.menuCtrl.toggle();

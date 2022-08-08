@@ -187,7 +187,7 @@ export class RewardsComponent implements OnInit {
       this.externalPost(article.external_link)
     } else {
       localStorage.removeItem('post');
-      this.interalPost(article)
+      this.internalPost(article)
     }
   }
 
@@ -222,7 +222,7 @@ export class RewardsComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  interalPost(article) {
+  internalPost(article) {
     localStorage.setItem('post', JSON.stringify(article));
     this.navCtrl.navigateForward("/post");
   }

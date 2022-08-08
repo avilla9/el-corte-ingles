@@ -41,7 +41,7 @@ export class SectionComponent implements OnInit {
           'internal_route': '',
           'img': '3.jpg'
         };
-        this.interalPost(data);
+        this.internalPost(data);
         break;
 
       case 4:
@@ -68,7 +68,7 @@ export class SectionComponent implements OnInit {
           'internal_route': 'explora',
           'img': '7.jpg'
         }
-        this.interalPost(data);
+        this.internalPost(data);
         break;
 
       default:
@@ -81,7 +81,7 @@ export class SectionComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  interalPost(data) {
+  internalPost(data) {
     localStorage.setItem('post', JSON.stringify(data));
     this.navCtrl.navigateForward("/post");
   }
