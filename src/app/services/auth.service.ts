@@ -60,4 +60,10 @@ export class AuthService {
       id: id,
     }, this.options);
   }
+
+  checkLevel() {
+    return this.http.post(this.apiUrl + '/users/level', {
+      id: parseInt(localStorage.getItem('user_id')),
+    }, this.options);
+  }
 }

@@ -1,9 +1,9 @@
 <ion-content overflow-scroll="true">
   <div class="container">
-    <div class="post-list" *ngFor="let post of posts" (click)="post.authorized ? clickPost(post) : showAlert()">
-      <img src="../../../assets/images/{{post.img}}">
+    <div class="post-list" *ngFor="let post of posts" (click)="checkAuth(post)">
+      <img src="{{post.img}}">
       <div class="content">
-        <div class="title">{{post.title}}</div>
+        <div class="title">{{post.section}}</div>
         <div class="description">{{post.description}}</div>
       </div>
       <ion-icon name="chevron-forward-outline"></ion-icon>

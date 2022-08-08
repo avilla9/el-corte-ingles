@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { NavController, IonRouterOutlet, AlertController } from '@ionic/angular';
+import { ArticleService } from '../../services/explore/article.service';
+import { ReactionService } from '../../services/reaction.service';
+import { Share } from '@capacitor/share';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-rooms',
@@ -8,8 +12,8 @@ import { NavController, IonRouterOutlet, AlertController } from '@ionic/angular'
   styleUrls: ['./rooms.component.scss'],
 })
 export class RoomsComponent implements OnInit {
-
-  posts: any = [
+  visited: any;
+  posts: any /* = [
     {
       title: 'TOP DELEGADOS',
       description: 'Información para ti y sobre tus agentes, ¿sabes para qué? ¡Pues claro! ¡Para que hables con ellos! ;)',
@@ -214,28 +218,70 @@ export class RoomsComponent implements OnInit {
         }
       ],
     },
-  ];
+  ]; */
 
   constructor(
     public navCtrl: NavController,
     public routerOutlet: IonRouterOutlet,
     public alertController: AlertController,
     private iab: InAppBrowser,
+    private articleService: ArticleService,
+    private reactions: ReactionService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
+    this.getArticles();
   }
 
   ionViewDidEnter() {
+    this.getArticles();
+  }
+
+  getArticles() {
+    this.articleService.articleList('Salas')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.posts = res;
+      }, (err: any) => {
+        console.log(err);
+      });
   }
 
   clickPost(article) {
-    if (article.link?.length) {
-      this.externalPost(article.link)
+    if (article.external_link?.length) {
+      this.externalPost(article.external_link)
     } else {
-      localStorage.removeItem('room');
+      localStorage.removeItem('post');
       this.interalPost(article)
     }
+  }
+
+  like(post, event) {
+    console.log('event', event);
+    var target = event.target || event.srcElement || event.currentTarget;
+    this.reactions
+      .doLike(post)
+      .subscribe((response) => {
+        if (response > 0) {
+          target.setAttribute('class', 'icon md hydrated liked');
+          target.setAttribute('name', 'heart');
+        } else {
+          target.setAttribute('class', 'icon md hydrated');
+          target.setAttribute('name', 'heart-outline');
+        }
+      });
+
+    console.log(this.visited)
+  }
+
+  async shareApp(post) {
+    await Share.share({
+      title: post.title,
+      text: post.short_description,
+      url: 'https://app-eci.web.app/',
+      dialogTitle: 'Share with buddies',
+    });
   }
 
   externalPost(url) {
@@ -254,5 +300,48 @@ export class RoomsComponent implements OnInit {
       buttons: ['Cerrar']
     });
     await alert.present();
+  }
+
+  checkAuth(post) {
+    this.authService.checkLevel()
+      .subscribe((res: any) => {
+        console.log(res, post.section);
+        console.log(res.role_name.toLowerCase())
+        let role = res.role_name.toLowerCase();
+
+        switch (role) {
+          case 'super usuario':
+            this.clickPost(post);
+            break;
+
+          case 'agente veterano':
+            this.clickPost(post);
+            break;
+
+          case 'agente':
+            this.clickPost(post);
+            break;
+
+          case 'delegado':
+            if (post.section === 'TOP DELEGADOS') {
+              this.clickPost(post);
+            } else {
+              this.showAlert();
+            }
+            break;
+
+          case 'agente en formación':
+            if (post.section === 'AGENTES EN FORMACIÓN') {
+              this.clickPost(post);
+            } else {
+              this.showAlert();
+            }
+            break;
+
+          default:
+            this.showAlert();
+            break;
+        }
+      });
   }
 }
