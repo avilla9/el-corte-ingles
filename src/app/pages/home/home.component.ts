@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
 
   ionViewDidEnter() {
     this.getStories();
+    this.getArticles();
     console.log(this.visited)
   }
 
