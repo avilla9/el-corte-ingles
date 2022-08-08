@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { IonContent, NavController } from '@ionic/angular';
+import { ArticleService } from '../../services/explore/article.service';
+import { ReactionService } from '../../services/reaction.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-knowledge',
@@ -9,7 +12,7 @@ import { IonContent, NavController } from '@ionic/angular';
 })
 export class KnowledgeComponent implements OnInit {
 
-  data: any = [
+  /* data: any = [
     {
       id: 1,
       title: 'El Cliente',
@@ -335,7 +338,10 @@ export class KnowledgeComponent implements OnInit {
         },
       ],
     },
-  ];
+  ]; */
+
+  posts;
+  visited;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -348,16 +354,34 @@ export class KnowledgeComponent implements OnInit {
   constructor(
     public navCtrl: NavController,
     private iab: InAppBrowser,
+    private articleService: ArticleService,
+    private reactions: ReactionService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getArticles();
+  }
+
+  ionViewDidEnter() {
+    this.getArticles();
+  }
+
+  getArticles() {
+    this.articleService.articleList('Conocimiento')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.posts = res;
+      }, (err: any) => {
+        console.log(err);
+      });
+  }
 
   clickPost(article) {
-    if (article.link.length) {
-      this.externalPost(article.link)
+    if (article.external_link?.length) {
+      this.externalPost(article.external_link)
     } else {
       localStorage.removeItem('post');
-      this.interalPost(article)
+      this.internalPost(article)
     }
   }
 
@@ -365,9 +389,36 @@ export class KnowledgeComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  interalPost(article) {
+  internalPost(article) {
     localStorage.setItem('post', JSON.stringify(article));
     this.navCtrl.navigateForward("/post");
+  }
+
+  like(post, event) {
+    console.log('event', event);
+    var target = event.target || event.srcElement || event.currentTarget;
+    this.reactions
+      .doLike(post)
+      .subscribe((response) => {
+        if (response > 0) {
+          target.setAttribute('class', 'icon md hydrated liked');
+          target.setAttribute('name', 'heart');
+        } else {
+          target.setAttribute('class', 'icon md hydrated');
+          target.setAttribute('name', 'heart-outline');
+        }
+      });
+
+    console.log(this.visited)
+  }
+
+  async shareApp(post) {
+    await Share.share({
+      title: post.title,
+      text: post.short_description,
+      url: 'https://app-eci.web.app/',
+      dialogTitle: 'Share with buddies',
+    });
   }
 }
 

@@ -9,10 +9,10 @@
 <ion-content overflow-scroll="true">
   <div class="container">
     <div class="post-list" *ngFor="let post of list.articles" (click)="clickPost(post)">
-      <img src="../../../assets/images/{{post.img}}">
+      <img src="{{post.media_path}}">
       <div class="content">
         <div class="title">{{post.title}}</div>
-        <div class="date">{{post.date}}</div>
+        <div class="date">{{post.created_at}}</div>
         <div class="description">{{post.short_description}}</div>
         <div class="read">
           <span>LEER MÁS</span>

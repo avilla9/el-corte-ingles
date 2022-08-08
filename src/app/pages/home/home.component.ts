@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
 
   ionViewDidEnter() {
     this.getStories();
+    this.getArticles();
     console.log(this.visited)
   }
 
@@ -101,6 +102,7 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.user = res;
+        localStorage.setItem('user', res);
       }, (err: any) => {
         console.log(err);
       });
@@ -159,7 +161,7 @@ export class HomeComponent implements OnInit {
     this.view(article);
 
     if (article.post_type === 'post') {
-      this.interalPost(article);
+      this.internalPost(article);
     } else if (article.post_type === 'external') {
       this.externalPost(article.external_link);
     }
@@ -169,7 +171,7 @@ export class HomeComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  interalPost(data) {
+  internalPost(data) {
     localStorage.setItem('post', JSON.stringify(data));
     this.navCtrl.navigateForward("/post");
   }

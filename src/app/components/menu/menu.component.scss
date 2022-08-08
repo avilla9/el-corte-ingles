@@ -17,6 +17,10 @@ ion-menu {
     justify-content: center;
     padding: 4vw 0;
 
+    ion-title {
+      color: var(--ion-color-light);
+    }
+
     p {
       margin: 2vw 0 0 0;
       color: var(--ion-color-medium);
