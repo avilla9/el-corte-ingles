@@ -15,6 +15,7 @@ import {
 } from '@capacitor/push-notifications';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { ReactionService } from '../../services/reaction.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,8 @@ export class HomeComponent implements OnInit {
     private iab: InAppBrowser,
 
     private renderer: Renderer2,
-    private elem: ElementRef
+    private elem: ElementRef,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -208,6 +210,20 @@ export class HomeComponent implements OnInit {
       .doView(post)
       .subscribe((response) => {
         console.log('view', response);
+      });
+  }
+
+  redirect(page) {
+    this.navCtrl.navigateForward(page);
+  }
+
+  logout(): void {
+    this.authService.logout(this.user.id)
+      .subscribe((res: any) => {
+        console.log(res);
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user_id');
+        this.router.navigate(['/login']);
       });
   }
 }

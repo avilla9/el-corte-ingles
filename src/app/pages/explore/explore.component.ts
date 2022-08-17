@@ -59,6 +59,20 @@ export class ExploreComponent implements OnInit {
       this.changeTab(0);
     }
   }
+  
+  /* ionViewWillLeave() {
+    this.menuCtrl.getMenus().then((menu) => {
+      console.log('menu explore', menu);
+      menu.splice(0, 1);
+      console.log('menu explore after', menu);
+      
+      if (menu.length > 1) {
+        menu.splice(1, 1);
+        menu[0].disabled = false;
+        console.log('menu explore after', menu);
+      }
+    })
+  } */
 
   changeTab(pos) {
     localStorage.setItem('lastTab', pos);
@@ -68,7 +82,7 @@ export class ExploreComponent implements OnInit {
     this.pageContainer.createComponent(this.tabs[pos].component);
   }
 
-  toggleMenu() {
+  toggleExplore() {
     this.menuCtrl.toggle();
   }
 }
