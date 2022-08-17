@@ -1,9 +1,9 @@
 <ion-menu side="end" menuId="main-menu" contentId="general" class="sliding-menu" color="ion-color-light-contrast"
   swipeGesture="false">
-  <ion-header no-lines>
-    <ion-title>{{user?.name}}</ion-title>
-    <p>{{user?.email}}</p>
-  </ion-header>
+  <div class="header">
+    <p class="title">{{user?.name}}</p>
+    <p class="text">{{user?.email}}</p>
+  </div>
 
   <ion-content>
     <ion-list>

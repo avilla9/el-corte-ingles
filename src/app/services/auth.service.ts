@@ -9,6 +9,7 @@ export class AuthService {
   authUrl = environment.authUrl;
   apiUrl = environment.apiUrl;
   client = environment.client_secret;
+  client_id = environment.client_id;
   options: any;
   /**
    * Constructor
@@ -35,7 +36,7 @@ export class AuthService {
   login(e: string, p: string) {
     return this.http.post(this.authUrl, {
       grant_type: 'password',
-      client_id: '2',
+      client_id: this.client_id,
       client_secret: this.client,
       username: e,
       password: p,
