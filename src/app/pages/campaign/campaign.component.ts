@@ -137,6 +137,9 @@ export class CampaignComponent implements OnInit {
       .subscribe((res: any) => {
         this.campaignsData = res;
         this.pageStatus = true;
+
+        this.currentCampaign = res[0];
+        this.loadSelectedCampaign(this.currentCampaign);
       }, (err: any) => {
         this.statusMessage = 'Error al cargar la información';
       });

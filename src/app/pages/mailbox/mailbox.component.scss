@@ -25,11 +25,25 @@
   }
 }
 
+.error {
+  color: red;
+  margin-bottom: 4vw;
+  line-height: 2vw;
+  text-align: center;
+}
+
+.ok {
+  color: green;
+  margin-bottom: 4vw;
+  line-height: 2vw;
+  text-align: center;
+}
+
 .mail-form {
   padding: 8vw;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 
   .selector,
   ion-input,

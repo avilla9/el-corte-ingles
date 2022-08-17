@@ -30,21 +30,19 @@
         <div class="subtitle">{{section.subtitle}}</div>
         <!-- CHALLENGE YOU -->
         <div class="scrolling-wrapper" *ngIf="section.custom_class == 'challenge-you'">
-          <div class="card" *ngFor="let article of section.articles">
+          <div class="card" *ngFor="let article of section.articles" (click)="clickPost(article)">
             <div class="content">
-              <p class="title" (click)="clickPost(article)">{{article.title}}</p>
-              <p class="body" [ngClass]="{'linked': article.link_short_description?.length}"
-                (click)="article.link_short_description?.length && externalPost(article.link_short_description)">
-                {{article.short_description}}</p>
+              <p class="title">{{article.title}}</p>
+              <p class="body">{{article.short_description}}</p>
             </div>
-            <img class="post-thumb" src="{{article.media_path}}" (click)="clickPost(article)">
+            <img class="post-thumb" src="{{article.media_path}}">
           </div>
         </div>
         <!-- LEARN TODAY -->
         <div class="scrolling-wrapper" *ngIf="section.custom_class == 'learn-today'">
-          <div class="card" *ngFor="let article of section.articles">
-            <img class="post-thumb" src="{{article.media_path}}" (click)="clickPost(article)">
-            <div class="content" (click)="clickPost(article)">
+          <div class="card" *ngFor="let article of section.articles" (click)="clickPost(article)">
+            <img class="post-thumb" src="{{article.media_path}}">
+            <div class="content">
               <p class="title">{{article.title}}</p>
               <p class="body">{{article.short_description}}</p>
             </div>
