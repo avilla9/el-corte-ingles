@@ -8,12 +8,16 @@
 
 <ion-content scrollEvents="true" overflow-scroll="true">
   <div class="mail-form">
-    <ion-select value="Sugest" multiple="false" placeholder="Sugerencia/Incidencia" class="selector">
-      <ion-select-option value="camp1">Sugerencia</ion-select-option>
-      <ion-select-option value="camp2">Incidencia</ion-select-option>
+    <div class="error" [hidden]="!error?.length">{{error}}</div>
+    <div class="ok" [hidden]="!ok?.length">{{ok}}</div>
+    <ion-select multiple="false" placeholder="Sugerencia/Incidencia" class="selector" #sugest>
+      <ion-select-option value="Sugerencia">Sugerencia</ion-select-option>
+      <ion-select-option value="Incidencia">Incidencia</ion-select-option>
     </ion-select>
-    <ion-input placeholder="Código de Agente"></ion-input>
-    <textarea class="description" placeholder="Describe qué necesitas" cols="30" rows="10"></textarea>
-    <button class="send">Enviar</button>
+    <ion-input placeholder="Código de Agente" #agent></ion-input>
+    <textarea class="description" placeholder="Describe qué necesitas" cols="30" rows="10" #message></textarea>
+    <button class="send" (click)="send({
+      type: sugest.value, agent_code: agent.value, message: message.value
+    })">Enviar</button>
   </div>
 </ion-content>
