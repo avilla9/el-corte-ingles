@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 import { ArticleService } from '../../services/explore/article.service';
 import { Share } from '@capacitor/share';
+import { StatusBar, Style } from '@capacitor/status-bar';
+
+
 
 import {
   ActionPerformed,
@@ -47,7 +50,9 @@ export class HomeComponent implements OnInit {
     private router: Router,
   ) { }
 
+
   ngOnInit() {
+
     this.getUserData();
     this.getArticles();
 
