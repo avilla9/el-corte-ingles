@@ -14,12 +14,11 @@
 
   <ion-card-content [innerHTML]="post.description"></ion-card-content>
 
-  <div class="cta" *ngIf="(post.button_name?.length) && (post.cta_content?.length || post.button_link?.length)">
-    <button *ngIf="post.cta_content?.length"
-      (click)="post.cta_content?.length && externalPost(post.cta_content)">{{post.cta}}</button>
+  <div class="cta" *ngIf="(post.button_name?.length)">
+    <button (click)="externalPost(post.button_link)">{{post.button_name}}</button>
 
-    <button *ngIf="post.button_link?.length"
-      (click)="post.button_link?.length && interalRedirection(post.button_link)">{{post.cta}}</button>
+    <!-- <button *ngIf="post.button_link?.length"
+      (click)="post.button_link?.length && interalRedirection(post.button_link)">{{post.cta}}</button> -->
   </div>
 
 </ion-content>
