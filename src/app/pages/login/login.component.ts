@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, CheckboxCustomEvent } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from '../../services/jwt-helper.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +13,17 @@ import { JwtHelperService } from '../../services/jwt-helper.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
+  @ViewChild(IonModal) modal: IonModal;
   // Variables
   form: FormGroup;
   loading: boolean;
   errors: boolean;
   error: string = '';
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  name: string;
+  canDismiss = false;
+  presentingElement = null;
+  isModalOpen = false;
 
   constructor(
     fb: FormBuilder,
@@ -44,12 +51,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_id');
+    this.presentingElement = document.querySelector('.ion-page');
   }
 
   /**
    * Login the user based on the form values
    */
-   async login() {
+  async login() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando...',
       translucent: true,
@@ -107,4 +115,27 @@ export class LoginComponent implements OnInit {
     return this.form.controls;
   }
 
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
+    }
+  }
+
+  onTermsChanged(event: Event) {
+    const ev = event as CheckboxCustomEvent;
+    this.canDismiss = ev.detail.checked;
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 }
