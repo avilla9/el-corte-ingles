@@ -82,7 +82,7 @@ export class AdoptionComponent implements OnInit {
     },
     {
       id: 3,
-      parentTitle: 'Lo que tengo que hacer',
+      parentTitle: 'Lo que he conseguido',
       img: 'adoption/need-do.jpg',
       list: [
         {
