@@ -15,6 +15,11 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {}
 
+  redirect(page) {
+    this.navCtrl.navigateForward(page);
+  }
+
+
   toggleMenuAccess() {
     this.menuCtrl.toggle();
   }

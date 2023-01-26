@@ -3,8 +3,9 @@
     <app-open></app-open>
 </ion-header>
 <ion-content>
-    <ion-button color="dark" fill="outline" expand="block" size="large">
-        <ion-icon name="lock-closed-outline"></ion-icon>&nbsp;Cambiar contraseña
-    </ion-button>
-
+    <div class="container">
+        <ion-button color="dark" fill="outline" expand="block" size="large" (click)="redirect('change-password')">
+            <ion-icon name="lock-closed-outline"></ion-icon>&nbsp;Cambiar contraseña
+        </ion-button>
+    </div>
 </ion-content>

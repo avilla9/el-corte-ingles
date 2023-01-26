@@ -21,6 +21,8 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from "./settings/settings.component";
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -29,7 +31,8 @@ const ENTRYCOMPONENTS = [
   RoomsComponent,
   AccessComponent,
   KnowledgeComponent,
-  SettingsComponent
+  SettingsComponent,
+  ChangePasswordComponent
 ];
 
 const COMPONENTS = [ExploreComponent];
