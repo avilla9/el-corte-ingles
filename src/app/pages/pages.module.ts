@@ -20,6 +20,8 @@ import { MailboxComponent } from './mailbox/mailbox.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GetEmailPasswordComponent } from './get-email-password/get-email-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -41,6 +43,8 @@ const COMPONENTS = [ExploreComponent];
     MailboxComponent,
     AlertsComponent,
     LoginComponent,
+    GetEmailPasswordComponent,
+    ChangePasswordComponent,
     COMPONENTS,
     ENTRYCOMPONENTS,
     /* ExploreComponent,

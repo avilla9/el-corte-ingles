@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://127.0.0.1:8000/api",
-  authUrl: "http://127.0.0.1:8000/oauth/token",
+  apiUrl: "http://127.0.0.1:8001/api",
+  authUrl: "http://127.0.0.1:8001/oauth/token",
   client_secret: 'YDDPg96SqFX8ibK08PPIq67m2Vz0PquDrW9pXlzq',
   client_id: '8'
 };
