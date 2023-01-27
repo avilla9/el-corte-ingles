@@ -13,7 +13,7 @@ export class RecoverPasswordService {
     private http: HttpClient
   ) { }
 
-  emailExists(data: {email: string}):Observable<any> {
+  emailExists(data):Observable<any> {
     return this.http.post(`${this.apiUrl}/users/password`, data);
   }
 

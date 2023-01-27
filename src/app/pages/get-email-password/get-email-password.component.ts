@@ -1,5 +1,5 @@
- import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, RequiredValidator, EmailValidator } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RecoverPasswordService } from 'src/app/services/password/recover-password.service';
 
@@ -10,29 +10,47 @@ import { RecoverPasswordService } from 'src/app/services/password/recover-passwo
 })
 export class GetEmailPasswordComponent implements OnInit {
 
-  formPassword: FormGroup = new FormGroup({});
   error: string = '';
-  constructor(
-    private recoveryPassword: RecoverPasswordService,
-    fb: FormBuilder,
-  ) {
-    this.formPassword = fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      origin: `${window.location.hostname}/change-password`,
-    });
-   }
 
-  ngOnInit(): void {}
+  formPassword = this.fb.group({
+    email: ['', {
+      validators: [
+        Validators.required,
+        Validators.email
+      ],
+      updateOn: 'blur'
+    }],
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private recoveryPassword: RecoverPasswordService,
+  ) { }
+
+  ngOnInit(): void { }
 
   getEmail(): void {
-    const body = this.formPassword.value;
+    this.error = '';
+    if (!this.formPassword.controls['email'].valid) {
+      this.error = 'Debe ingresar un email válido';
+      return;
+    }
 
-    // console.log(window.location.hostname);
+    let body = {
+      email: this.formPassword.value['email'],
+      origin: window.location.hostname + '/change-password'
+    }
+
     this.recoveryPassword.emailExists(body).subscribe((response) => {
-      if(response.status === 400) {
-        console.log(response.errors);
-        this.error = response.errors;
+      if (response.status !== 202) {
+        this.error = response.errors['email'];
+      } else {
+        this.showModal();
       }
     });
+  }
+
+  showModal() {
+    console.log('hello');
   }
 }
