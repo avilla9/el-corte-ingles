@@ -62,7 +62,7 @@ export class ChangePasswordComponent implements OnInit {
     
     this.changePasswords.send(info).subscribe((res: any) => {
       if (res.status != 202) {
-        let errorMessage = res.message;
+        let errorMessage = res.message.replace('new password', 'contraseña nueva');
         this.error = errorMessage;
       } else {
         this.ok = res.message;
