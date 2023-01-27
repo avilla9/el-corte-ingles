@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class TabsComponent implements OnInit {
   show: boolean = false;
+  unShow: any = ['login', 'get-email', 'change-password'];
 
   constructor(
     public navCtrl: NavController,
@@ -16,9 +17,9 @@ export class TabsComponent implements OnInit {
   ) {
     router.events.subscribe((val: any) => {
       if (val instanceof ResolveStart) {
-        if (val.url !== '/login') {
+        if (!this.unShow.includes(val.url.split('/')[1])) {
           this.show = true;
-        } else  {
+        } else {
           this.show = false;
         }
       }
