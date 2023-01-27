@@ -52,7 +52,7 @@ export class AdoptionComponent implements OnInit {
         {
           id: 4,
           img: 'adoption/4.png',
-          title: 'Inforgrafía #VenteaSECI',
+          title: 'Infografía #VenteaSECI',
           description: 'Descárgala ya',
           date: '',
           cta: '',
@@ -82,7 +82,7 @@ export class AdoptionComponent implements OnInit {
     },
     {
       id: 3,
-      parentTitle: 'Lo que he conseguido',
+      ParentTitle: 'Lo que he conseguido',
       img: 'adoption/need-do.jpg',
       list: [
         {
