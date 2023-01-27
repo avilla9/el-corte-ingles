@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal, NavController } from '@ionic/angular';
 import { CampaignService } from 'src/app/services/explore/campaign.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { CampaignService } from 'src/app/services/explore/campaign.service';
   styleUrls: ['./campaign.component.scss'],
 })
 export class CampaignComponent implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
 
   data: any = [
     {
@@ -253,5 +254,9 @@ export class CampaignComponent implements OnInit {
         ],
       },
     ];
+  }
+  
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
 }

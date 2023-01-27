@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonModal, NavController } from '@ionic/angular';
 import { ChartType } from 'chart.js';
 import { CampaignService } from 'src/app/services/explore/campaign.service';
 
@@ -9,6 +9,7 @@ import { CampaignService } from 'src/app/services/explore/campaign.service';
   styleUrls: ['./adoption.component.scss'],
 })
 export class AdoptionComponent implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
 
   data: any = [
     {
@@ -264,5 +265,9 @@ export class AdoptionComponent implements OnInit {
         ],
       },
     ];
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
 }
