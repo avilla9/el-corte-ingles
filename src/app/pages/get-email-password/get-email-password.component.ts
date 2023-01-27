@@ -42,7 +42,7 @@ export class GetEmailPasswordComponent implements OnInit {
 
     let body = {
       email: this.formPassword.value['email'],
-      origin: window.location.hostname + '/change-password'
+      origin: window.location.hostname + '/forgot-password'
     }
 
     this.recoveryPassword.emailExists(body).subscribe((response) => {

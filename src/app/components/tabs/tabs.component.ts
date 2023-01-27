@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class TabsComponent implements OnInit {
   show: boolean = false;
-  unShow: any = ['login', 'get-email', 'change-password'];
+  unShow: any = ['login', 'get-email', 'forgot-password'];
 
   constructor(
     public navCtrl: NavController,

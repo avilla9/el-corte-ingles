@@ -6,9 +6,9 @@ import { RecoverPasswordService } from 'src/app/services/password/recover-passwo
 import { ModalMessageComponent } from '../modal-message/modal-message.component';
 
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss'],
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ChangePasswordComponent implements OnInit {
   id: string;
