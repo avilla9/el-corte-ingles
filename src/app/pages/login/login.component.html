@@ -8,12 +8,14 @@
     <ion-input type="email" id="email" formControlName="email" class="form-control" placeholder="Email"></ion-input>
     <ion-input type="password" id="password" formControlName="password" class="form-control"
       placeholder="Contraseña"></ion-input>
-    <a href="get-email" class="password">Recuperar contraseña</a>
-    <div style="display: flex;margin-bottom: 8px;align-items: center; justify-content: space-between;">
-      <a id="open-modal" style="text-align: right; width: 85%" (click)="setOpen(true)">¿Aceptas los términos y
-        condiciones?</a> <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)"
+    <div style="width: 100%; display: flex;margin-bottom: 12px;align-items: center; justify-content: space-between;">
+      <a id="open-modal" style="text-align: left; width: 85%" (click)="setOpen(true)">Acepto los términos y
+        condiciones</a> <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)"
         [checked]="canDismiss"></ion-checkbox>
     </div>
+    <button style="margin-bottom: 12px;" class="send" [disabled]="loading || !canDismiss">Acceder</button>
+    <a href="get-email" style="text-align: center; margin-bottom: 8px; width: 100%" class="password">¿Olvidaste tu contraseña?</a>
+
     <ion-modal [isOpen]="isModalOpen" #modal trigger="open-modal" [canDismiss]="canDismiss"
       [presentingElement]="presentingElement">
       <ng-template>
@@ -161,7 +163,6 @@
         </ion-content>
       </ng-template>
     </ion-modal>
-    <button class="send" [disabled]="loading || !canDismiss">Acceder</button>
   </form>
 </div>
 <ion-footer class="ion-no-border">
