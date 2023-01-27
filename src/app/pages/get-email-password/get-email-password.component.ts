@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, RequiredValidator, EmailValidator } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { RecoverPasswordService } from 'src/app/services/password/recover-password.service';
+import { ModalMessageComponent } from '../modal-message/modal-message.component';
 
 @Component({
   selector: 'app-get-email-password',
@@ -25,6 +27,8 @@ export class GetEmailPasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private recoveryPassword: RecoverPasswordService,
+    private modalCtrl: ModalController,
+    private router: Router,
   ) { }
 
   ngOnInit(): void { }
@@ -45,12 +49,26 @@ export class GetEmailPasswordComponent implements OnInit {
       if (response.status !== 202) {
         this.error = response.errors['email'];
       } else {
-        this.showModal();
+        this.showModal(this.formPassword.value['email']);
       }
     });
   }
 
-  showModal() {
-    console.log('hello');
+  async showModal(email) {
+    const modal = await this.modalCtrl.create({
+      component: ModalMessageComponent,
+      backdropDismiss: true,
+      swipeToClose: true,
+      animated: true,
+      componentProps: {
+        message: 'Se ha enviado un enlace para reestablecer la contraseña al correo: ' + email,
+      }
+    });
+
+    modal.onWillDismiss().then(data => {
+      this.router.navigate(['/']);
+    });
+
+    return await modal.present();
   }
 }
