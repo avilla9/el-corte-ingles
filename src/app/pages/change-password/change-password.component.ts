@@ -21,7 +21,10 @@ export class ChangePasswordComponent implements OnInit {
     private loadingCtrl: LoadingController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.error = ""
+    this.ok = ""
+   }
 
   redirect(page) {
     this.navCtrl.navigateForward(page);
@@ -34,8 +37,8 @@ export class ChangePasswordComponent implements OnInit {
   oldTextFieldType: boolean;
   ismyTextFieldType: boolean;
 
-  togglemyNewPasswordFieldType(){
-//    $event.stopPropagation();
+  togglemyNewPasswordFieldType() {
+    //    $event.stopPropagation();
     return this.ismyTextFieldType = !this.ismyTextFieldType;
   }
   togglemyOldPasswordFieldType() {
@@ -43,34 +46,31 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   async send(info) {
-    let error = '';
-    if (error.length) {
-      console.log(error)
-      this.error = error;
-    } else {
-      const loading = await this.loadingCtrl.create({
-        message: 'Enviando...',
-        translucent: true,
-      });
-      await loading.present();
-      this.loading = true;
-      this.error = '';
-
-      this.changePasswords.send(info).subscribe((res: any) => {
-        // console.log(res.message);
-        loading.dismiss();
-        this.loading = false;
-        this.ok = res.message
-      }, (err: any) => {
-        loading.dismiss();
-        console.log(err);
-        this.loading = false;
-        let errorMessage = err.error.new_password[0]
-        console.log(errorMessage);
-        this.error = errorMessage;
-      });
+    this.error = '';
+    this.ok = '';
+    console.log(info);
+    if (!info.old_password) {
+      console.log(info.old_password);
+      this.error = 'El campo de contraseña anterior no puede estar vacio.';
+      return;
     }
+    const loading = await this.loadingCtrl.create({
+      message: 'Enviando...',
+      translucent: true,
+    });
+    await loading.present();
+    
+    this.changePasswords.send(info).subscribe((res: any) => {
+      if (res.status != 202) {
+        let errorMessage = res.message;
+        this.error = errorMessage;
+      } else {
+        this.ok = res.message;
+      }
+      loading.dismiss();
+    }, (err: any) => {
+          loading.dismiss();
+          this.error = "No se ha podido cambiar la contraseña, intente nuevamente."
+      });
   }
-
-
 }
