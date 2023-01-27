@@ -23,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from "./settings/settings.component";
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
+import { GetEmailPasswordComponent } from './get-email-password/get-email-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const ENTRYCOMPONENTS = [
   AdoptionComponent,
@@ -46,6 +48,8 @@ const COMPONENTS = [ExploreComponent];
     MailboxComponent,
     AlertsComponent,
     LoginComponent,
+    GetEmailPasswordComponent,
+    ForgotPasswordComponent,
     COMPONENTS,
     ENTRYCOMPONENTS,
     /* ExploreComponent,

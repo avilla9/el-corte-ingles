@@ -7,6 +7,7 @@ import { MenuComponent } from './menu/menu.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { StoryComponent } from './story/story.component';
 import { OpenComponent } from './open/open.component';
+import { ModalMessageComponent } from '../pages/modal-message/modal-message.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { OpenComponent } from './open/open.component';
     TabsComponent,
     StoryComponent,
     OpenComponent,
+    ModalMessageComponent
   ],
   exports: [
     SectionComponent,
