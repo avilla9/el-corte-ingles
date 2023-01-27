@@ -17,7 +17,7 @@ export class RecoverPasswordService {
     return this.http.post(`${this.apiUrl}/users/password`, data);
   }
 
-  newPassword(data: {id: string, password: string, check_password: string}):Observable<any> {
+  newPassword(data):Observable<any> {
     return this.http.put(`${this.apiUrl}/users/reset-password`, data);
   }
 }
