@@ -10,7 +10,7 @@ import { ModalMessageComponent } from '../modal-message/modal-message.component'
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
 })
-export class ChangePasswordComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
   id: string;
   error = '';
   passOne: boolean;
@@ -42,7 +42,7 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  changePassword(): void {
+  ForgotPassword(): void {
     this.error = '';
 
     if (!this.form.controls['password'].valid || !this.form.controls['password_check'].valid) {
