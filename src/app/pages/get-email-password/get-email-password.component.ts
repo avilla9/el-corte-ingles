@@ -13,7 +13,7 @@ import { ModalMessageComponent } from '../modal-message/modal-message.component'
 export class GetEmailPasswordComponent implements OnInit {
 
   error: string = '';
-
+  date = new Date().getFullYear();
   formPassword = this.fb.group({
     email: ['', {
       validators: [

@@ -13,10 +13,13 @@ import { ModalMessageComponent } from '../modal-message/modal-message.component'
 export class ChangePasswordComponent implements OnInit {
   id: string;
   error = '';
+  passOne: boolean;
+  passTwo: boolean;
   form = this.fb.group({
     password: ['', [Validators.required]],
     password_check: ['', [Validators.required]],
   });
+  date = new Date().getFullYear();
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -24,10 +27,14 @@ export class ChangePasswordComponent implements OnInit {
     private recoveryPassword: RecoverPasswordService,
     private router: Router,
     private modalCtrl: ModalController
-  ) {}
+  ) { }
 
-  // this.activateRoute.params.subscribe( params => {
-  // });
+  togglePassOne() {
+    return this.passOne = !this.passOne;
+  }
+  togglePassTwo() {
+    return this.passTwo = !this.passTwo;
+  }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
@@ -50,15 +57,17 @@ export class ChangePasswordComponent implements OnInit {
     };
 
     this.recoveryPassword.newPassword(body).subscribe((response) => {
-      if(response.status !== 202) {
-        if(response.errors['password']) {
+      if (response.status !== 202) {
+        if (response.errors['password']) {
           this.error = response.errors['password'][0];
-        } else if(response.errors['password_check']) {
+        } else if (response.errors['password_check']) {
           this.error = response.errors['password_check'][0];
         }
       } else {
         this.showModal();
       }
+    }, (error) => {
+      this.error = 'Ha ocurrido un error, por favor intente nuevamente.'
     });
   }
 

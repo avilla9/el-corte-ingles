@@ -11,8 +11,6 @@ import { AccessComponent } from './pages/access/access.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { GuestGuardService } from './services/guest-guard.service';
-import { ConfigComponent } from './pages/config/config.component';
-import { PasswordComponent } from './pages/password/password.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { GetEmailPasswordComponent } from './pages/get-email-password/get-email-password.component';
 
@@ -27,11 +25,8 @@ const routes: Routes = [
   { path: 'room-list', component: RoomListComponent, canActivate: [AuthGuardService] },
   { path: 'mailbox', component: MailboxComponent, canActivate: [AuthGuardService] },
   { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuardService] },
-  { path: 'config', component: ConfigComponent, canActivate: [AuthGuardService] },
-  { path: 'password', component: PasswordComponent, canActivate: [AuthGuardService] },
   { path: 'change-password/:id', component: ChangePasswordComponent, canActivate: [GuestGuardService] },
   { path: 'get-email', component: GetEmailPasswordComponent, canActivate: [GuestGuardService] },
-  /* { path: '**', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuardService] }, */
 ];
 
 @NgModule({

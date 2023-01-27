@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   visited: any;
   user: any;
   posts: any;
+  date = new Date().getFullYear();
 
   @Output() newItemEvent = new EventEmitter<boolean>();
 
