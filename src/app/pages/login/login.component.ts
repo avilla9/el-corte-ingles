@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   canDismiss = false;
   presentingElement = null;
   isModalOpen = false;
+  date = new Date().getFullYear();
 
   constructor(
     fb: FormBuilder,

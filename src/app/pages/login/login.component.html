@@ -8,9 +8,9 @@
     <ion-input type="email" id="email" formControlName="email" class="form-control" placeholder="Email"></ion-input>
     <ion-input type="password" id="password" formControlName="password" class="form-control"
       placeholder="Contraseña"></ion-input>
-    <div style="display: flex; margin-bottom: 8px">
-      <a id="open-modal" (click)="setOpen(true)">¿Aceptas los términos y
-        condiciones?</a> <ion-checkbox id="terms" style="margin-left: 4px;" (ionChange)="onTermsChanged($event)"
+    <div style="display: flex;margin-bottom: 8px;align-items: center; justify-content: space-between;">
+      <a id="open-modal" style="text-align: right; width: 85%" (click)="setOpen(true)">¿Aceptas los términos y
+        condiciones?</a> <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)"
         [checked]="canDismiss"></ion-checkbox>
     </div>
     <ion-modal [isOpen]="isModalOpen" #modal trigger="open-modal" [canDismiss]="canDismiss"
@@ -164,6 +164,6 @@
   </form>
 </div>
 <ion-footer class="ion-no-border">
-  <span>2022 Created by</span>
+  <span>{{date}} Created by</span>
   <img class="tvc-logo" src="../../../assets/icon/tvc-white.svg" />
 </ion-footer>
