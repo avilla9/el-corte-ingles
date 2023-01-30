@@ -16,7 +16,7 @@
       <div class="right" (click)="changeStory('next')"></div>
     </div>
     <img src="{{img[pos].media_path}}">
-    <div class="open-link" *ngIf="img[pos].button_name?.length" (click)="openLink(img[pos].link)">
+    <div class="open-link" *ngIf="img[pos].button_name?.length" (click)="openLink(img[pos].button_link)">
       <div class="name">
         {{img[pos].button_name}}
       </div>

@@ -11,6 +11,11 @@ import { AccessComponent } from './pages/access/access.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { GuestGuardService } from './services/guest-guard.service';
+import { SettingsComponent } from "./pages/settings/settings.component";
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { GetEmailPasswordComponent } from './pages/get-email-password/get-email-password.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [GuestGuardService] },
@@ -23,7 +28,11 @@ const routes: Routes = [
   { path: 'room-list', component: RoomListComponent, canActivate: [AuthGuardService] },
   { path: 'mailbox', component: MailboxComponent, canActivate: [AuthGuardService] },
   { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuardService] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService] },
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuardService] },
   /* { path: '**', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuardService] }, */
+  { path: 'forgot-password/:id', component: ForgotPasswordComponent, canActivate: [GuestGuardService] },
+  { path: 'get-email', component: GetEmailPasswordComponent, canActivate: [GuestGuardService] },
 ];
 
 @NgModule({
