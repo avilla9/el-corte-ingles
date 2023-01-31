@@ -41,6 +41,7 @@ export class MenuComponent implements OnInit {
 
   redirect(page) {
     this.navCtrl.navigateForward(page);
+    this.toggleMenu();
   }
 
   /**
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit {
         localStorage.removeItem('access_token');
         localStorage.removeItem('user_id');
         this.router.navigate(['/login']);
+        this.toggleMenu();
       });
   }
 
