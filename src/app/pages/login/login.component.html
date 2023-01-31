@@ -6,15 +6,27 @@
   <div class="error" [hidden]="!error?.length">{{error}}</div>
   <form class="mail-form" [formGroup]="form" (submit)="login()">
     <ion-input type="email" id="email" formControlName="email" class="form-control" placeholder="Email"></ion-input>
-    <ion-input type="password" id="password" formControlName="password" class="form-control"
-      placeholder="Contraseña"></ion-input>
-    <div style="width: 100%; display: flex;margin-bottom: 12px;align-items: center; justify-content: space-between;">
+
+    <div class="input-pass">
+      <ion-input [type]="passOne ? 'text' : 'password'" id="password" formControlName="password" class="form-control"
+        placeholder="Confirma tu contraseña">
+        <ion-icon [name]="passOne ? 'eye-off' : 'eye'" slot="end" (click)="togglePassOne()"></ion-icon>
+      </ion-input>
+    </div>
+
+    <!-- <ion-input [type]="passOne ? 'text' : 'password'" id="password" formControlName="password" class="form-control"
+      placeholder="Contraseña">
+      <ion-icon [name]="passOne ? 'eye-off' : 'eye'" slot="end" (click)="togglePassOne()"></ion-icon>
+    </ion-input> -->
+
+    <div style="width: 100%; display: flex;margin-bottom: 4vw;align-items: center; justify-content: space-between;">
       <a id="open-modal" style="text-align: left; width: 85%" (click)="setOpen(true)">Acepto los términos y
         condiciones</a> <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)"
         [checked]="canDismiss"></ion-checkbox>
     </div>
-    <button style="margin-bottom: 12px;" class="send" [disabled]="loading || !canDismiss">Acceder</button>
-    <a href="get-email" style="text-align: center; margin-bottom: 8px; width: 100%" class="password">¿Olvidaste tu contraseña?</a>
+    <button style="margin-bottom: 4vw;" class="send" [disabled]="loading || !canDismiss">Acceder</button>
+    <a href="get-email" style="text-align: center; text-decoration: none; margin-bottom: 4vw; width: 100%"
+      class="password">¿Olvidaste tu contraseña?</a>
 
     <ion-modal [isOpen]="isModalOpen" #modal trigger="open-modal" [canDismiss]="canDismiss"
       [presentingElement]="presentingElement">

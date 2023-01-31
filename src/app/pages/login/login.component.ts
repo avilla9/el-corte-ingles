@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   presentingElement = null;
   isModalOpen = false;
   date = new Date().getFullYear();
+  passOne: boolean;
 
   constructor(
     fb: FormBuilder,
@@ -138,5 +139,9 @@ export class LoginComponent implements OnInit {
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
+  }
+
+  togglePassOne() {
+    return this.passOne = !this.passOne;
   }
 }
