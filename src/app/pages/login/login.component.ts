@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from '../../services/jwt-helper.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -54,94 +55,100 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_id');
     this.presentingElement = document.querySelector('.ion-page');
+
+    if (environment.production) {
+      console.log('prod')
+    } else {
+      console.log('dev')
+    }
   }
 
   /**
    * Login the user based on the form values
    */
   async login() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando...',
-      translucent: true,
+  const loading = await this.loadingCtrl.create({
+    message: 'Cargando...',
+    translucent: true,
+  });
+  await loading.present();
+
+  this.loading = true;
+  this.errors = false;
+  this.authService.login(this.controls.email.value, this.controls.password.value)
+    .subscribe((res: any) => {
+      loading.dismiss();
+      this.error = '';
+      console.log(res);
+      // Store the access token in the localstorage
+      localStorage.setItem('access_token', res.access_token);
+      localStorage.setItem('user_id', this.jwtHelper.id().toString());
+      this.loading = false;
+
+
+      const parent = this.renderer.selectRootElement(this.elem.nativeElement.parentNode);
+      this.renderer.setStyle(parent, 'display', 'block')
+
+      // Navigate to home page
+      this.router.navigate(['/']);
+    }, (err: any) => {
+      loading.dismiss();
+      let errorType = err.error.error;
+      switch (err.status) {
+        case 0:
+          this.error = 'Ha ocurrido un error de conexión.';
+          break;
+
+        case 400:
+          if (errorType === 'invalid_grant') {
+            this.error = 'Email o contraseña incorrectas';
+          } else if (errorType === 'invalid_request') {
+            this.error = 'Rellene todos los campos';
+          }
+          break;
+
+        default:
+          break;
+      }
+      // This error can be internal or invalid credentials
+      // You need to customize this based on the error.status code
+      this.loading = false;
+      this.errors = true;
     });
-    await loading.present();
-
-    this.loading = true;
-    this.errors = false;
-    this.authService.login(this.controls.email.value, this.controls.password.value)
-      .subscribe((res: any) => {
-        loading.dismiss();
-        this.error = '';
-        console.log(res);
-        // Store the access token in the localstorage
-        localStorage.setItem('access_token', res.access_token);
-        localStorage.setItem('user_id', this.jwtHelper.id().toString());
-        this.loading = false;
-
-
-        const parent = this.renderer.selectRootElement(this.elem.nativeElement.parentNode);
-        this.renderer.setStyle(parent, 'display', 'block')
-
-        // Navigate to home page
-        this.router.navigate(['/']);
-      }, (err: any) => {
-        loading.dismiss();
-        let errorType = err.error.error;
-        switch (err.status) {
-          case 0:
-            this.error = 'Ha ocurrido un error de conexión.';
-            break;
-
-          case 400:
-            if (errorType === 'invalid_grant') {
-              this.error = 'Email o contraseña incorrectas';
-            } else if (errorType === 'invalid_request') {
-              this.error = 'Rellene todos los campos';
-            }
-            break;
-
-          default:
-            break;
-        }
-        // This error can be internal or invalid credentials
-        // You need to customize this based on the error.status code
-        this.loading = false;
-        this.errors = true;
-      });
-  }
+}
 
   /**
    * Getter for the form controls
    */
   get controls() {
-    return this.form.controls;
-  }
+  return this.form.controls;
+}
 
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
+cancel() {
+  this.modal.dismiss(null, 'cancel');
+}
 
-  confirm() {
-    this.modal.dismiss(this.name, 'confirm');
-  }
+confirm() {
+  this.modal.dismiss(this.name, 'confirm');
+}
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
+onWillDismiss(event: Event) {
+  const ev = event as CustomEvent<OverlayEventDetail<string>>;
+  if (ev.detail.role === 'confirm') {
+    this.message = `Hello, ${ev.detail.data}!`;
   }
+}
 
-  onTermsChanged(event: Event) {
-    const ev = event as CheckboxCustomEvent;
-    this.canDismiss = ev.detail.checked;
-  }
+onTermsChanged(event: Event) {
+  const ev = event as CheckboxCustomEvent;
+  this.canDismiss = ev.detail.checked;
+}
 
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
+setOpen(isOpen: boolean) {
+  this.isModalOpen = isOpen;
+}
 
-  togglePassOne() {
-    return this.passOne = !this.passOne;
-  }
+togglePassOne() {
+  return this.passOne = !this.passOne;
+}
 }
