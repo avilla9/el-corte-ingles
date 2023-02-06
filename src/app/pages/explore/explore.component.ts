@@ -17,6 +17,8 @@ export class ExploreComponent implements OnInit {
   activeTab = 0;
   currentTitle: string;
 
+  //Scroll explora//
+
   tabs = [
     {
       component: CampaignComponent,
@@ -40,7 +42,7 @@ export class ExploreComponent implements OnInit {
     },
     {
       component: RoomsComponent,
-      title: 'Salas',
+      title: 'Cara',
       icon: 'estrella.svg',
     },
   ]
@@ -59,13 +61,13 @@ export class ExploreComponent implements OnInit {
       this.changeTab(0);
     }
   }
-  
+
   /* ionViewWillLeave() {
     this.menuCtrl.getMenus().then((menu) => {
       console.log('menu explore', menu);
       menu.splice(0, 1);
       console.log('menu explore after', menu);
-      
+
       if (menu.length > 1) {
         menu.splice(1, 1);
         menu[0].disabled = false;
