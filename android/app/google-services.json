@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "898982569099",
+    "project_id": "app-eci",
+    "storage_bucket": "app-eci.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898982569099:android:d11e69609f3395482ba08e",
+        "android_client_info": {
+          "package_name": "com.eci.secicoins"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898982569099-ci3bp0hme3usqq7ngu5oqqbo3h8riacr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_zAKZDyJEhmYoII6dgutlBujNWUBUaJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898982569099-ci3bp0hme3usqq7ngu5oqqbo3h8riacr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898982569099:android:772155f5c84c8aae2ba08e",
+        "android_client_info": {
+          "package_name": "com.thevaluescorner.www"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898982569099-ci3bp0hme3usqq7ngu5oqqbo3h8riacr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_zAKZDyJEhmYoII6dgutlBujNWUBUaJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898982569099-ci3bp0hme3usqq7ngu5oqqbo3h8riacr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

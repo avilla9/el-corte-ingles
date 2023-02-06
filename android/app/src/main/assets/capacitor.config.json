@@ -1,0 +1,6 @@
+{
+	"appId": "com.thevaluescorner.www",
+	"appName": "The Net",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
