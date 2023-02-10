@@ -1,11 +1,12 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
-import { MenuController, ModalController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { StoryComponent } from '../../components/story/story.component';
 import { StoriesService } from '../../services/stories.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 import { ArticleService } from '../../services/explore/article.service';
 import { Share } from '@capacitor/share';
+
 
 import {
   ActionPerformed,
@@ -16,6 +17,7 @@ import {
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { ReactionService } from '../../services/reaction.service';
 import { Router } from '@angular/router';
+import { PostAccessService } from 'src/app/services/post-access.service';
 
 @Component({
   selector: 'app-home',
@@ -42,6 +44,9 @@ export class HomeComponent implements OnInit {
     private articleService: ArticleService,
     private reactions: ReactionService,
     private iab: InAppBrowser,
+    private getPostAccess: PostAccessService,
+    private loadingCtrl: LoadingController,
+    private alertController: AlertController,
 
     private renderer: Renderer2,
     private elem: ElementRef,
@@ -174,9 +179,34 @@ export class HomeComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  internalPost(data) {
-    localStorage.setItem('post', JSON.stringify(data));
-    this.navCtrl.navigateForward("/post");
+  async internalPost(data) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      translucent: true,
+    });
+    await loading.present();
+    this.getPostAccess.sendAccess(data).subscribe((res: any)  => {
+      if (res == 0) {  
+        // console.log(res, "No puedes entrar");
+        this.presentAlert();
+        }
+      else {
+        localStorage.setItem('post', JSON.stringify(data)); 
+        this.navCtrl.navigateForward("/post" + "/" + data.id);
+      }
+      loading.dismiss();
+        }, (err: any) => {
+          console.log(err);
+        });
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡ERROR!',
+      subHeader: 'No tienes autorizacion para visualizar este contenido.',
+      buttons: ['Aceptar'],
+    });
+
+    await alert.present();
   }
 
   like(post, event) {

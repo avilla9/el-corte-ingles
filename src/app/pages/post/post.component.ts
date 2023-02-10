@@ -56,6 +56,7 @@ export class PostComponent implements OnInit {
   }
 
   async shareApp(post) {
+    // console.log(post);
     await Share.share({
       title: post.title,
       text: post.short_description,

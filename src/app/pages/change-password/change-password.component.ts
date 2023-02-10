@@ -48,7 +48,7 @@ export class ChangePasswordComponent implements OnInit {
   async send(info) {
     this.error = '';
     this.ok = '';
-    console.log(info);
+    // console.log(info);
     if (!info.old_password) {
       console.log(info.old_password);
       this.error = 'El campo de contraseña anterior no puede estar vacio.';
