@@ -39,7 +39,7 @@
                 </div>
                 <div class="icons">
                     <ion-icon [className]="article.reactions?.length ? 'icon liked' : 'icon'" [name]="article.reactions?.length ? 'heart' : 'heart-outline'" (click)="like(article, $event)"></ion-icon>
-                    <ion-icon class="icon" name="share-social-outline" (click)="shareApp(post)"></ion-icon>
+                    <ion-icon class="icon" name="share-social-outline" (click)="shareApp(article)"></ion-icon>
                 </div>
             </div>
         </div>
