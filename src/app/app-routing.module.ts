@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'post', component: PostComponent, canActivate: [AuthGuardService] },
+  { path: 'post/:id', component: PostComponent, canActivate: [AuthGuardService] },
   { path: 'explora', component: ExploreComponent, canActivate: [AuthGuardService] },
   { path: 'accesos', component: AccessComponent, canActivate: [AuthGuardService] },
   { path: 'post-list', component: PostListComponent, canActivate: [AuthGuardService] },

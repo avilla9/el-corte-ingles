@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
-import { NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { PostAccessService } from 'src/app/services/post-access.service';
 
 @Component({
   selector: 'app-section',
@@ -14,6 +15,9 @@ export class SectionComponent implements OnInit {
     private router: Router,
     public navCtrl: NavController,
     private iab: InAppBrowser,
+    private getPostAccess: PostAccessService,
+    private loadingCtrl: LoadingController,
+    private alertController: AlertController,
   ) { }
 
   ngOnInit() { }
@@ -81,9 +85,34 @@ export class SectionComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  internalPost(data) {
-    localStorage.setItem('post', JSON.stringify(data));
-    this.navCtrl.navigateForward("/post");
+  async internalPost(data) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      translucent: true,
+    });
+    await loading.present();
+    this.getPostAccess.sendAccess(data).subscribe((res: any)  => {
+      if (res == 0) {  
+        // console.log(res, "No puedes entrar");
+        this.presentAlert();
+        }
+      else {
+        localStorage.setItem('post', JSON.stringify(data)); 
+        this.navCtrl.navigateForward("/post" + "/" + data.id);
+      }
+      loading.dismiss();
+        }, (err: any) => {
+          console.log(err);
+        });
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡ERROR!',
+      subHeader: 'No tienes autorizacion para visualizar este contenido.',
+      buttons: ['Aceptar'],
+    });
+
+    await alert.present();
   }
 
 }

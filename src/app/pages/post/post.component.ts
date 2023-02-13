@@ -4,7 +4,9 @@ import { NavController } from '@ionic/angular';
 import { SafeHtmlPipe } from '../../safe-html.pipe';
 import { ReactionService } from '../../services/reaction.service';
 import { Share } from '@capacitor/share';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -13,21 +15,35 @@ import { Share } from '@capacitor/share';
 })
 export class PostComponent implements OnInit {
 
-  post: any;
-
+  post: Observable<any>;
+  apiUrl = environment.apiUrl;
+  postsId = JSON.parse(localStorage.getItem("post"));
+  id: any;
+  
+ 
   constructor(
     private iab: InAppBrowser,
     public navCtrl: NavController,
     private reactions: ReactionService,
-  ) { }
+    public httpClient: HttpClient
+    
+  ) {
+    this.id = this.postsId.id;
+    // console.log(this.id);
+    this.post = this.httpClient.get(this.apiUrl + '/posts/' + this.id);
+    this.post
+    .subscribe(data => {
+      // console.log('my data: ', data);
+      this.post = data;
+    })
+   }
 
   ngOnInit() {
-    this.post = JSON.parse(localStorage.getItem("post"));
-    console.log(this.post);
+    // console.log(this.post);
   }
 
   ionViewDidEnter() {
-    this.post = JSON.parse(localStorage.getItem("post"));
+    // this.post = JSON.parse(localStorage.getItem("post"));
   }
 
   externalPost(url) {
@@ -56,11 +72,20 @@ export class PostComponent implements OnInit {
   }
 
   async shareApp(post) {
-    await Share.share({
+    if (post.external_link != null) {
+      await Share.share({
+        title: post.title,
+        text: post.short_description,
+        url: post.external_link,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    } else {
+      await Share.share({
       title: post.title,
       text: post.short_description,
-      url: 'https://app-eci.web.app/',
-      dialogTitle: 'Share with buddies',
+      url: window.location.href,
+      dialogTitle: '¡Comparte con tus amigos!',
     });
   }
+}
 }
