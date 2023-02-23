@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.user = res;
-        localStorage.setItem('user', res);
+        localStorage.setItem('user', JSON.stringify(res));
       }, (err: any) => {
         console.log(err);
       });
