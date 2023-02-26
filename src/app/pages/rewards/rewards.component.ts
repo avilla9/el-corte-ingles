@@ -151,6 +151,7 @@ export class RewardsComponent implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent;
   posts: any;
   visited: any;
+  user: any;
 
   scrollToLabel(label) {
     console.log(label);
@@ -170,6 +171,8 @@ export class RewardsComponent implements OnInit {
 
   ngOnInit() {
     this.getArticles();
+    this.user = JSON.parse(localStorage.getItem('user'));
+    // console.log(this.user);
   }
 
   ionViewDidEnter() {

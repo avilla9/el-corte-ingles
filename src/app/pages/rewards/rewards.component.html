@@ -2,19 +2,16 @@
     <div class="container">
 
         <div class="info">
-            <img src="../../../assets/images/rewards/header.png">
-            <div class="text">
-                Juega, aprende, supérate, diviértete, entretente, gana SECI Coins y canjéalos por los productos que tú quieras…
-            </div>
+            <img src="../../../assets/images/rewards/secicoins-equipo_V2.png">
         </div>
 
         <div class="available-coins">
             <div class="container">
                 <div class="content">
                     <div class="title">SECI COINS DISPONIBLES</div>
-                    <div class="coins">80</div>
+                    <div class="coins">{{user.secicoins}}</div>
                 </div>
-                <img src="../../../assets/images/rewards/seci.png">
+                <img src="../../../assets/images/rewards/secicoins-banner-logo.png">
             </div>
         </div>
 
@@ -62,7 +59,9 @@
                 <!-- HAPPY BOX -->
                 <div class="scrolling-wrapper" *ngIf="section.custom_class == 'happy-box'">
                     <div class="card">
-                        <img class="post-thumb" src="../../../assets/images/rewards/canjea.png">
+                        <a href="../../../assets/Escaparate SECICOINS_V4_compressed.pdf" target="_blank">
+                            <img class="post-thumb" src="../../../assets/images/rewards/secicoins-escaparate_V2.png">
+                        </a>
                     </div>
                 </div>
             </div>
