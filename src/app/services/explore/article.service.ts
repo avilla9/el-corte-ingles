@@ -17,7 +17,7 @@ export class ArticleService {
     return this.http.post(
       this.apiUrl + '/posts/list',
       {
-        user_id: parseInt(localStorage.getItem('user_id')),
+        user_id: parseInt(localStorage.getItem('user_id'), 10),
         page: page,
       }
     );

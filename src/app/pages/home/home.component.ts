@@ -41,7 +41,9 @@ export class HomeComponent implements OnInit {
     private renderer: Renderer2,
     private elem: ElementRef,
     private router: Router,
-  ) { }
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
     this.getUserData();
@@ -135,18 +137,19 @@ export class HomeComponent implements OnInit {
     });
     await loading.present();
     this.getPostAccess.sendAccess(data).subscribe((res: any) => {
-      console.log(res);
       if (!res) {
         this.presentAlert();
       } else {
-        localStorage.setItem('post', JSON.stringify(data));
-        this.navCtrl.navigateForward('/post' + '/' + data.id);
+        loading.dismiss();
+        console.log('/post/', data.id);
+        //this.router.navigateByUrl('/post/' + data.id);
+        this.router.navigate(['/post', data.id]);
       }
-      loading.dismiss();
     }, (err: any) => {
       console.log(err);
     });
   }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: '¡ERROR!',
@@ -176,6 +179,7 @@ export class HomeComponent implements OnInit {
   }
 
   async shareApp(post) {
+    console.log('share', window.location.host);
     if (post.external_link != null) {
       await Share.share({
         title: post.title,
@@ -187,7 +191,7 @@ export class HomeComponent implements OnInit {
       await Share.share({
         title: post.title,
         text: post.short_description,
-        url: window.location + '/posts/' + post.id,
+        url: window.location.origin + '/post/' + post.id,
         dialogTitle: '¡Comparte con tus amigos!',
       });
     }

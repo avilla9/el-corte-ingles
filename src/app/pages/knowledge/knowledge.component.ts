@@ -401,19 +401,19 @@ export class KnowledgeComponent implements OnInit {
       translucent: true,
     });
     await loading.present();
-    this.getPostAccess.sendAccess(article).subscribe((res: any)  => {
-      if (res == 0) {  
+    this.getPostAccess.sendAccess(article).subscribe((res: any) => {
+      if (res == 0) {
         // console.log(res, "No puedes entrar");
         this.presentAlert();
-        }
+      }
       else {
-        localStorage.setItem('post', JSON.stringify(article)); 
+        localStorage.setItem('post', JSON.stringify(article));
         this.navCtrl.navigateForward("/post" + "/" + article.id);
       }
       loading.dismiss();
-        }, (err: any) => {
-          console.log(err);
-        });
+    }, (err: any) => {
+      console.log(err);
+    });
   }
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -453,12 +453,12 @@ export class KnowledgeComponent implements OnInit {
       });
     } else {
       await Share.share({
-      title: post.title,
-      text: post.short_description,
-      url: window.location + "/posts/" + post.id,
-      dialogTitle: '¡Comparte con tus amigos!',
-    });
+        title: post.title,
+        text: post.short_description,
+        url: window.location.origin + '/post/' + post.id,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    }
   }
-}
 }
 
