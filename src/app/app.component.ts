@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { StatusBar, Style } from '@capacitor/status-bar';
-import { Platform } from '@ionic/angular';
-
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PushNotificationService } from './services/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -15,20 +13,9 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private platform: Platform
-
-    ) {       
-      this.initializeApp()
-    }
-    initializeApp() {
-      this.platform.ready().then( async () => {
-        // set status bar to white
-       await StatusBar.setStyle({style:Style.Dark});
-        // set status bar to white
-        
-      });
-    }
-    
-    
+    public pushNotifications: PushNotificationService,
+  ) {
+    this.pushNotifications.initPush();
+  }
 
 }

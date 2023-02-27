@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, CheckboxCustomEvent } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from '../../services/jwt-helper.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +14,19 @@ import { JwtHelperService } from '../../services/jwt-helper.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
+  @ViewChild(IonModal) modal: IonModal;
   // Variables
   form: FormGroup;
   loading: boolean;
   errors: boolean;
-  error: string = '';
+  error = '';
+  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  name: string;
+  canDismiss = false;
+  presentingElement = null;
+  isModalOpen = false;
+  date = new Date().getFullYear();
+  passOne: boolean;
 
   constructor(
     fb: FormBuilder,
@@ -41,15 +51,26 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get controls() {
+    return this.form.controls;
+  }
+
   ngOnInit(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_id');
+    this.presentingElement = document.querySelector('.ion-page');
+
+    if (environment.production) {
+      console.log('prod');
+    } else {
+      console.log('dev');
+    }
   }
 
   /**
    * Login the user based on the form values
    */
-   async login() {
+  async login() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando...',
       translucent: true,
@@ -70,13 +91,14 @@ export class LoginComponent implements OnInit {
 
 
         const parent = this.renderer.selectRootElement(this.elem.nativeElement.parentNode);
-        this.renderer.setStyle(parent, 'display', 'block')
+        this.renderer.setStyle(parent, 'display', 'block');
 
         // Navigate to home page
         this.router.navigate(['/']);
       }, (err: any) => {
+        console.log('auth error', err);
         loading.dismiss();
-        let errorType = err.error.error;
+        const errorType = err.error.error;
         switch (err.status) {
           case 0:
             this.error = 'Ha ocurrido un error de conexión.';
@@ -100,11 +122,31 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  /**
-   * Getter for the form controls
-   */
-  get controls() {
-    return this.form.controls;
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
 
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
+  }
+
+  onWillDismiss(event: Event) {
+    const ev = event as CustomEvent<OverlayEventDetail<string>>;
+    if (ev.detail.role === 'confirm') {
+      this.message = `Hello, ${ev.detail.data}!`;
+    }
+  }
+
+  onTermsChanged(event: Event) {
+    const ev = event as CheckboxCustomEvent;
+    this.canDismiss = ev.detail.checked;
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  togglePassOne() {
+    return this.passOne = !this.passOne;
+  }
 }

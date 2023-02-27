@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
-import { IonContent, NavController } from '@ionic/angular';
+import { AlertController, IonContent, LoadingController, NavController } from '@ionic/angular';
 import { ArticleService } from '../../services/explore/article.service';
 import { ReactionService } from '../../services/reaction.service';
 import { Share } from '@capacitor/share';
+import { PostAccessService } from 'src/app/services/post-access.service';
 
 @Component({
   selector: 'app-knowledge',
@@ -356,6 +357,9 @@ export class KnowledgeComponent implements OnInit {
     private iab: InAppBrowser,
     private articleService: ArticleService,
     private reactions: ReactionService,
+    private getPostAccess: PostAccessService,
+    private loadingCtrl: LoadingController,
+    private alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -369,7 +373,9 @@ export class KnowledgeComponent implements OnInit {
   getArticles() {
     this.articleService.articleList('Conocimiento')
       .subscribe((res: any) => {
-        console.log(res);
+        console.log('knowledge', res);
+        res.splice(2, 1); // el trabajo
+        res.splice(5, 1); // la compañia
         this.posts = res;
       }, (err: any) => {
         console.log(err);
@@ -389,9 +395,34 @@ export class KnowledgeComponent implements OnInit {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');
   }
 
-  internalPost(article) {
-    localStorage.setItem('post', JSON.stringify(article));
-    this.navCtrl.navigateForward("/post");
+  async internalPost(article) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      translucent: true,
+    });
+    await loading.present();
+    this.getPostAccess.sendAccess(article).subscribe((res: any) => {
+      if (res == 0) {
+        // console.log(res, "No puedes entrar");
+        this.presentAlert();
+      }
+      else {
+        localStorage.setItem('post', JSON.stringify(article));
+        this.navCtrl.navigateForward("/post" + "/" + article.id);
+      }
+      loading.dismiss();
+    }, (err: any) => {
+      console.log(err);
+    });
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡ERROR!',
+      subHeader: 'No tienes autorizacion para visualizar este contenido.',
+      buttons: ['Aceptar'],
+    });
+
+    await alert.present();
   }
 
   like(post, event) {
@@ -413,12 +444,21 @@ export class KnowledgeComponent implements OnInit {
   }
 
   async shareApp(post) {
-    await Share.share({
-      title: post.title,
-      text: post.short_description,
-      url: 'https://app-eci.web.app/',
-      dialogTitle: 'Share with buddies',
-    });
+    if (post.external_link != null) {
+      await Share.share({
+        title: post.title,
+        text: post.short_description,
+        url: post.external_link,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    } else {
+      await Share.share({
+        title: post.title,
+        text: post.short_description,
+        url: window.location.origin + '/post/' + post.id,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    }
   }
 }
 

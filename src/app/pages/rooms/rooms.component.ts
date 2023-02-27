@@ -276,13 +276,22 @@ export class RoomsComponent implements OnInit {
   }
 
   async shareApp(post) {
-    await Share.share({
+    if (post.external_link != null) {
+      await Share.share({
+        title: post.title,
+        text: post.short_description,
+        url: post.external_link,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    } else {
+      await Share.share({
       title: post.title,
       text: post.short_description,
-      url: 'https://app-eci.web.app/',
-      dialogTitle: 'Share with buddies',
+      url: window.location.origin + '/post/' + post.id,
+      dialogTitle: '¡Comparte con tus amigos!',
     });
   }
+}
 
   externalPost(url) {
     this.iab.create(url, '_self', 'beforeload=yes,location=yes,clearcache=yes,navigationbuttoncolor=#ffc404');

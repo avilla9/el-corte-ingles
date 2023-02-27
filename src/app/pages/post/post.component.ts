@@ -4,30 +4,41 @@ import { NavController } from '@ionic/angular';
 import { SafeHtmlPipe } from '../../safe-html.pipe';
 import { ReactionService } from '../../services/reaction.service';
 import { Share } from '@capacitor/share';
-
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class PostComponent implements OnInit {
 
-  post: any;
+  post;
+  apiUrl = environment.apiUrl;
+  id: any;
 
   constructor(
     private iab: InAppBrowser,
     public navCtrl: NavController,
     private reactions: ReactionService,
-  ) { }
-
-  ngOnInit() {
-    this.post = JSON.parse(localStorage.getItem("post"));
-    console.log(this.post);
+    public httpClient: HttpClient,
+    private route: ActivatedRoute,
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.httpClient.post(this.apiUrl + '/posts/postDetails', {
+      postId: this.id,
+      userId: parseInt(localStorage.getItem('user_id'), 10)
+    }).subscribe(data => {
+      console.log('my data: ', data);
+      this.post = data;
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 
-  ionViewDidEnter() {
-    this.post = JSON.parse(localStorage.getItem("post"));
+  ngOnInit() {
+    // console.log(this.post);
   }
 
   externalPost(url) {
@@ -40,7 +51,7 @@ export class PostComponent implements OnInit {
 
   like(post, event) {
     console.log('event', event);
-    var target = event.target || event.srcElement || event.currentTarget;
+    const target = event.target || event.srcElement || event.currentTarget;
     this.reactions
       .doLike(post)
       .subscribe((response) => {
@@ -56,11 +67,20 @@ export class PostComponent implements OnInit {
   }
 
   async shareApp(post) {
-    await Share.share({
-      title: post.title,
-      text: post.short_description,
-      url: 'https://app-eci.web.app/',
-      dialogTitle: 'Share with buddies',
-    });
+    if (post.external_link != null) {
+      await Share.share({
+        title: post.title,
+        text: post.short_description,
+        url: post.external_link,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    } else {
+      await Share.share({
+        title: post.title,
+        text: post.short_description,
+        url: window.location.origin + '/post/' + post.id,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    }
   }
 }

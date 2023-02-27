@@ -4,10 +4,10 @@ android {
     compileSdkVersion 33
     defaultConfig {
       targetSdk 33
-      minSdk 31
+      minSdk 22
       applicationId "com.thevaluescorner.www"
-      versionCode 1
-      versionName "1.0"
+      versionCode 7
+      versionName "1.07"
       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
       aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
