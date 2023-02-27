@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PushNotificationService } from './services/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,11 @@ export class AppComponent {
 
   public href: string = window.location.pathname;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    public pushNotifications: PushNotificationService,
+  ) {
+    this.pushNotifications.initPush();
+  }
+
 }

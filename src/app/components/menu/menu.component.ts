@@ -48,14 +48,12 @@ export class MenuComponent implements OnInit {
    * Logout the user and revoke his token
    */
   logout(): void {
-    this.authService.logout(this.user.id)
-      .subscribe((res: any) => {
-        console.log(res);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('user_id');
-        this.router.navigate(['/login']);
-        this.toggleMenu();
-      });
+    if (typeof(this.user?.id) !== 'undefined') {
+      this.authService.logout(this.user.id);
+    }
+    this.toggleMenu();
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
   getUserData() {

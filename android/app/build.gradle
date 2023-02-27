@@ -4,7 +4,7 @@ android {
     compileSdkVersion 33
     defaultConfig {
       targetSdk 33
-      minSdk 31
+      minSdk 29
       applicationId "com.thevaluescorner.www"
       versionCode 1
       versionName "1.0"

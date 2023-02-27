@@ -6,14 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from 'src/app/services/jwt-helper.service';
 import { ArticleService } from '../../services/explore/article.service';
 import { Share } from '@capacitor/share';
-
-
-import {
-  ActionPerformed,
-  PushNotificationSchema,
-  PushNotifications,
-  Token,
-} from '@capacitor/push-notifications';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { ReactionService } from '../../services/reaction.service';
 import { Router } from '@angular/router';
@@ -25,14 +17,12 @@ import { PostAccessService } from 'src/app/services/post-access.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
+  @Output() newItemEvent = new EventEmitter<boolean>();
   images: any;
   visited: any;
   user: any;
   posts: any;
   date = new Date().getFullYear();
-
-  @Output() newItemEvent = new EventEmitter<boolean>();
 
   constructor(
     public menuCtrl: MenuController,
@@ -56,53 +46,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getUserData();
     this.getArticles();
-
-    /* console.log('Initializing HomePage');
-    // Request permission to use push notifications
-    // iOS will prompt user and return if they granted permission or not
-    // Android will just grant without prompting
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
-      }
-    });
-
-    // On success, we should be able to receive notifications
-    PushNotifications.addListener('registration',
-      (token: Token) => {
-        alert('Push registration success, token: ' + token.value);
-      }
-    );
-
-    // Some issue with our setup and push will not work
-    PushNotifications.addListener('registrationError',
-      (error: any) => {
-        alert('Error on registration: ' + JSON.stringify(error));
-      }
-    );
-
-    // Show us the notification payload if the app is open on our device
-    PushNotifications.addListener('pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
-      }
-    );
-
-    // Method called when tapping on a notification
-    PushNotifications.addListener('pushNotificationActionPerformed',
-      (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-      }
-    ); */
   }
 
   ionViewDidEnter() {
     this.getStories();
     this.getArticles();
-    console.log(this.visited)
+    console.log(this.visited);
   }
 
   getUserData() {
@@ -185,19 +134,18 @@ export class HomeComponent implements OnInit {
       translucent: true,
     });
     await loading.present();
-    this.getPostAccess.sendAccess(data).subscribe((res: any)  => {
-      if (res == 0) {  
-        // console.log(res, "No puedes entrar");
+    this.getPostAccess.sendAccess(data).subscribe((res: any) => {
+      console.log(res);
+      if (!res) {
         this.presentAlert();
-        }
-      else {
-        localStorage.setItem('post', JSON.stringify(data)); 
-        this.navCtrl.navigateForward("/post" + "/" + data.id);
+      } else {
+        localStorage.setItem('post', JSON.stringify(data));
+        this.navCtrl.navigateForward('/post' + '/' + data.id);
       }
       loading.dismiss();
-        }, (err: any) => {
-          console.log(err);
-        });
+    }, (err: any) => {
+      console.log(err);
+    });
   }
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -211,7 +159,7 @@ export class HomeComponent implements OnInit {
 
   like(post, event) {
     console.log('event', event);
-    var target = event.target || event.srcElement || event.currentTarget;
+    const target = event.target || event.srcElement || event.currentTarget;
     this.reactions
       .doLike(post)
       .subscribe((response) => {
@@ -224,7 +172,7 @@ export class HomeComponent implements OnInit {
         }
       });
 
-    console.log(this.visited)
+    console.log(this.visited);
   }
 
   async shareApp(post) {
@@ -237,13 +185,13 @@ export class HomeComponent implements OnInit {
       });
     } else {
       await Share.share({
-      title: post.title,
-      text: post.short_description,
-      url: window.location + "/posts/" + post.id,
-      dialogTitle: '¡Comparte con tus amigos!',
-    });
+        title: post.title,
+        text: post.short_description,
+        url: window.location + '/posts/' + post.id,
+        dialogTitle: '¡Comparte con tus amigos!',
+      });
+    }
   }
-}
 
   view(post) {
     this.reactions
@@ -255,15 +203,5 @@ export class HomeComponent implements OnInit {
 
   redirect(page) {
     this.navCtrl.navigateForward(page);
-  }
-
-  logout(): void {
-    this.authService.logout(this.user.id)
-      .subscribe((res: any) => {
-        console.log(res);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('user_id');
-        this.router.navigate(['/login']);
-      });
   }
 }

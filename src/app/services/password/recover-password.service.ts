@@ -13,11 +13,11 @@ export class RecoverPasswordService {
     private http: HttpClient
   ) { }
 
-  emailExists(data):Observable<any> {
+  emailExists(data): Observable<any> {
     return this.http.post(`${this.apiUrl}/users/password`, data);
   }
 
-  newPassword(data):Observable<any> {
+  newPassword(data): Observable<any> {
     return this.http.put(`${this.apiUrl}/users/reset-password`, data);
   }
 }
