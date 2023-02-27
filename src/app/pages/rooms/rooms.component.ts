@@ -287,7 +287,7 @@ export class RoomsComponent implements OnInit {
       await Share.share({
       title: post.title,
       text: post.short_description,
-      url: window.location + "/posts/" + post.id,
+      url: window.location.origin + '/post/' + post.id,
       dialogTitle: '¡Comparte con tus amigos!',
     });
   }

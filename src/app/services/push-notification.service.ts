@@ -8,19 +8,49 @@ import {
 import { Device } from '@capacitor/device';
 import { AlertController, NavController } from '@ionic/angular';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PushNotificationService {
   pushNotificationToken: any; // I save the token to database because i need it in my backend code.
+  apiUrl = environment.apiUrl;
 
   constructor(
+    private http: HttpClient,
     private alertController: AlertController,
     private iab: InAppBrowser,
     public navCtrl: NavController
   ) {
 
+  }
+
+  createNotification(notification): Observable<any> {
+    return this.http.post(
+      this.apiUrl + '/notification/store',
+      notification
+    );
+  }
+
+  showNotification(): Observable<any> {
+    return this.http.post(
+      this.apiUrl + '/notification/show',
+      { userId: parseInt(localStorage.getItem('user_id'), 10), }
+    );
+  }
+
+  updateNotification(notification): Observable<any> {
+    return this.http.put(
+      this.apiUrl + '/notification/update',
+      {
+        isOpen: true,
+        userId: parseInt(localStorage.getItem('user_id'), 10),
+        postId: notification.id
+      }
+    );
   }
 
   resetBadgeCount() {
@@ -77,12 +107,23 @@ export class PushNotificationService {
             {
               text: 'OK',
               handler: () => {
+                const notificationData = {
+                  isOpen: false,
+                  userId: parseInt(localStorage.getItem('user_id'), 10),
+                  title: notification.title,
+                  body: notification.body,
+                  image: '',
+                  post: '',
+                };
                 if ('post' in notification.data) {
+                  notificationData.isOpen = true;
+                  notificationData.post = notification.data.post;
                   console.log(notification.data.post);
                   this.navCtrl.navigateForward(notification.data.post);
                 } else if (data.data.url !== '' && data.data.url !== undefined) {
                   const browser = this.iab.create(data.data.url, '_blank', { location: 'no' });
                 }
+                this.createNotification(notificationData);
               }
 
             }
@@ -100,15 +141,24 @@ export class PushNotificationService {
         const data = notification.notification.data;
         console.log('Action performed: ' + JSON.stringify(notification.notification));
 
+        const notificationData = {
+          isOpen: true,
+          userId: parseInt(localStorage.getItem('user_id'), 10),
+          title: data.notification.title,
+          body: data.notification.body,
+          image: '',
+          post: '',
+        };
         if ('post' in data) {
           console.log(data.post);
+          notificationData.post = data.post;
           this.navCtrl.navigateForward(data.post);
         } else if (data.url) {
           if (data.url !== '' && data.url !== undefined) {
             const browser = this.iab.create(data.url, '_blank', { location: 'no' });
           }
         }
-
+        this.createNotification(notificationData);
       }
     );
   }

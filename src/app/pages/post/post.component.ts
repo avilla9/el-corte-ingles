@@ -6,42 +6,39 @@ import { ReactionService } from '../../services/reaction.service';
 import { Share } from '@capacitor/share';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class PostComponent implements OnInit {
 
   post;
   apiUrl = environment.apiUrl;
-  postsId = JSON.parse(localStorage.getItem('post'));
   id: any;
 
   constructor(
     private iab: InAppBrowser,
     public navCtrl: NavController,
     private reactions: ReactionService,
-    public httpClient: HttpClient
-
+    public httpClient: HttpClient,
+    private route: ActivatedRoute,
   ) {
-    this.id = this.postsId.id;
-    // console.log(this.id);
-    this.post = this.httpClient.get(this.apiUrl + '/posts/' + this.id);
-    this.post
-      .subscribe(data => {
-        // console.log('my data: ', data);
-        this.post = data;
-      });
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.httpClient.post(this.apiUrl + '/posts/postDetails', {
+      postId: this.id,
+      userId: parseInt(localStorage.getItem('user_id'), 10)
+    }).subscribe(data => {
+      console.log('my data: ', data);
+      this.post = data;
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 
   ngOnInit() {
     // console.log(this.post);
-  }
-
-  ionViewDidEnter() {
-    // this.post = JSON.parse(localStorage.getItem("post"));
   }
 
   externalPost(url) {
@@ -81,7 +78,7 @@ export class PostComponent implements OnInit {
       await Share.share({
         title: post.title,
         text: post.short_description,
-        url: window.location.href,
+        url: window.location.origin + '/post/' + post.id,
         dialogTitle: '¡Comparte con tus amigos!',
       });
     }
