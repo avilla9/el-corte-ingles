@@ -455,7 +455,7 @@ export class KnowledgeComponent implements OnInit {
       await Share.share({
         title: post.title,
         text: post.short_description,
-        url: window.location.origin + '/post/' + post.id,
+       url: window.location.href + '/post/' + post.id,
         dialogTitle: '¡Comparte con tus amigos!',
       });
     }
