@@ -45,7 +45,9 @@ export class HomeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
+
   ngOnInit() {
+
     this.getUserData();
     this.getArticles();
   }

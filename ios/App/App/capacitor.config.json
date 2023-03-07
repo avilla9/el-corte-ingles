@@ -1,6 +1,6 @@
 {
-	"appId": "com.thevaluescorner.www",
-	"appName": "The Net - El Corte Inglés",
+	"appId": "com.thevaluescorner.thenet",
+	"appName": "The Net",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }
