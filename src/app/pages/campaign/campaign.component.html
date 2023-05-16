@@ -6,19 +6,20 @@
     </ion-select>
 
     <div class="boxes" [hidden]="!campaignSelected">
-        <div class="box" *ngFor="let data of campaignSelected?.slice(0,2); let i = index" (click)="clickBox(data)">
+        <div class="box" *ngFor="let data of campaignSelected?.slice(0,1); let i = index" (click)="clickBox(data)">
             <img src="../../../assets/images/campaign/{{i+1}}.jpg">
             <div class="float-content">
                 <div class="title">{{data.section}}</div>
             </div>
         </div>
 
-        <!-- <div class="box" id="open-modal" expand="block">
+        <div class="box" id="open-modal" expand="block">
       <img src="../../../assets/images/campaign/3.jpg">
       <div class="float-content">
         <div class="title">Lo que he conseguido</div>
       </div>
-    </div> -->
+    </div>
+
     </div>
 
     <div class="select-a-campaign" [hidden]="campaignSelected">
